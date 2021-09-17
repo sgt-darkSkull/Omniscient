@@ -52,6 +52,12 @@
     11. HaveIbeenPawned
 
 #### Email
+1. https://github.com/m4ll0k/infoga
+2. http://www.skymem.info/
+3. http://metricsparrow.com/toolkit/email-permutator/
+4. https://www.mailboxvalidator.com/demo
+5. https://intelx.io/
+
 
 ## Web Sites
 ### Attributes
