@@ -3,6 +3,7 @@ import os
 import WhatsMyName.check_online_presence as wmn_cop
 import requests
 
+# INCOMPLETE
 if os.name == "posix":
     class Colors:
         YELLOW = "\033[93m"
@@ -61,4 +62,6 @@ def check_username(user):
         pass
 
 
-check_username('David')
+# Testing
+if __name__ == '__main__':
+    check_username('David')

@@ -1,3 +1,6 @@
 [submodule "WhatsMyName"]
 	path = WhatsMyName
 	url = https://github.com/WebBreacher/WhatsMyName
+[submodule "sherlock"]
+	path = sherlock
+	url = https://github.com/sherlock-project/sherlock
