@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup as BS
 
 
 def get_info(name: str) -> dict:
-
     """
     This Function Filters the User's Twitter Profile
 
@@ -45,6 +44,16 @@ def get_info(name: str) -> dict:
     info['location'] = soup.find_all('span')[28].string
 
     return info
+
+
+def run(name: str) -> dict:
+    """
+    Run Twitter Info Check
+
+    :param name:
+    :return:
+    """
+    return get_info(name)
 
 
 if __name__ == '__main__':
