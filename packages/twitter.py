@@ -3,7 +3,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
 
-def get_info(name: str) -> dict:
+def get_info(name: str, isurl: bool) -> dict:
     """
     This Function Filters the User's Twitter Profile
 
@@ -16,12 +16,16 @@ def get_info(name: str) -> dict:
     Should Look:
         1.  https://twitter.com/<userid>
 
+    :param isurl:
     :param name:
     :return info:
     """
 
     info = dict()
-    plink = f"https://twitter.com/{name}"
+    if not isurl:
+        plink = f"https://twitter.com/{name}"
+    else:
+        plink = name
 
     # Firefox Driver (Selenium)
     driver = webdriver.Firefox()
@@ -46,14 +50,15 @@ def get_info(name: str) -> dict:
     return info
 
 
-def run(name: str) -> dict:
+def run(name: str, isurl: bool = False) -> dict:
     """
     Run Twitter Info Check
 
+    :param isurl:
     :param name:
     :return:
     """
-    return get_info(name)
+    return get_info(name, isurl)
 
 
 if __name__ == '__main__':
