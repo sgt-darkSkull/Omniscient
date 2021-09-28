@@ -126,6 +126,13 @@ def get_following(name: str) -> list:
 
 
 def run(name: str) -> dict:
+    """
+    Run Github Info Check
+
+    :param name:
+    :return:
+    """
+
     return get_userinfo(name)
 
 
