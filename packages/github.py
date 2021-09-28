@@ -1,6 +1,7 @@
 import json
 import requests
 
+
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
 # [-] INCOMPLETE : AI IMAGE RECOGNITION
 
@@ -22,18 +23,18 @@ import requests
 # received_events_url	"https://api.github.com/users/<username>/received_events"
 
 
-def value_of(value: str) -> str:
-    if value == '""':
-        return None
+def value_of(value: str) :
+    if value == '""' or value is None:
+        return False
     else:
         return value
 
 
 # User Profile Info Gatherer
-def get_userinfo(name: str) -> None:
+def get_userinfo(name: str) -> dict:
     # https: // api.github.com / users / < username >
 
-    '''
+    """
     This Function Filters the User's Github Profile
 
     Useful Information on Github Profile:
@@ -77,16 +78,14 @@ print(label.description, '(%.2f%%)' % (label.score*100.))
 
 
     :param name:
-    :return:
-    '''
+    :return info:
+    """
 
     call_url = f"https://api.github.com/users/{name}"
     rq = requests.get(call_url)
     js_obj = json.loads(rq.content.decode('utf-8'))
 
-    data = dict()
-
-    data['name'] = js_obj['name']
+    info = dict()
 
     prstr = f'''
         1.  Login Name : {js_obj['login']}
@@ -107,7 +106,10 @@ print(label.description, '(%.2f%%)' % (label.score*100.))
         2.  https://api.github.com/users/{js_obj['login']}/subscriptions
         3.  https://api.github.com/users/{js_obj['login']}/events'''
 
-    print(prstr)
+    for key in js_obj:
+        info[key] = js_obj[key] if value_of(js_obj[key]) else None
+
+    return info
 
 
 # Get Followed Users
@@ -117,17 +119,15 @@ def get_following(name: str) -> list:
     js_obj = json.loads(requests.get(url).content.decode('utf-8'))
     following = list()
 
-    for folow in js_obj:
-        following.append(folow['login'])
+    for folw in js_obj:
+        following.append(folw['login'])
 
     return following
 
 
-def run(name: str) -> None:
-    pass
+def run(name: str) -> dict:
+    return get_userinfo(name)
 
 
 if __name__ == '__main__':
-    # get_userinfo("sgt-darkSkull")
-    get_userinfo("stamparm")
-    # get_userinfo("Ishikawa-riva")
+    print(run(input()))
