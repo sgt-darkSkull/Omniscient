@@ -7,7 +7,7 @@ def get_info(name: str, isurl: bool) -> dict:
     """
     This Function Filters the User's Twitter Profile
 
-    Useful Information on Github Profile:
+    Useful Information on Twitter Profile:
         1.  Login Name : userid
         2.  Name: name
         3.  Location: location
@@ -62,4 +62,4 @@ def run(name: str, isurl: bool = False) -> dict:
 
 
 if __name__ == '__main__':
-    print(get_info(input()))
+    print(run(input()))
