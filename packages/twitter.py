@@ -11,7 +11,7 @@ def get_info(name: str, isurl: bool) -> dict:
         1.  Login Name : userid
         2.  Name: name
         3.  Location: location
-        4. Bio: bio
+        4.  Bio: bio
 
     Should Look:
         1.  https://twitter.com/<userid>
