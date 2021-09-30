@@ -16,10 +16,10 @@
 ## Human
 ### Attributes
 
-1. Name
-    1.1 First Name
-    1.2 Middle Name
-    1.3 Sur Name
+1. Name 
+   1. First Name 
+   2. Middle Name 
+   3. Sur Name
 2. Email Accounts
 3. Phone Number
 4. Passwords
