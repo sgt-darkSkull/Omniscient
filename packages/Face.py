@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 
 def get_info(name: str, isurl: bool) -> dict:
     """
-    This Function Filters the User's Twitter Profile
+    This Function Filters the User's Facebook Profile
     Useful Information on facebook Profile:
         1.  Work: work
         2.  Name: name
@@ -47,3 +47,17 @@ def get_info(name: str, isurl: bool) -> dict:
     info['college'] = soup.find_all('a')[6].string
 
     return info
+
+
+def run(name: str, isurl: bool = False) -> dict:
+    """
+    Run Facebook Info Check
+    :param isurl:
+    :param name:
+    :return:
+    """
+    return get_info(name, isurl)
+
+
+if __name__ == '__main__':
+    print(run(input()))
