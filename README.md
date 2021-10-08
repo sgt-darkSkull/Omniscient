@@ -64,3 +64,5 @@
 6. Running Services
 7. Exploit Suggestions
 
+## Database ERD
+ Lucid Chart link- https://lucid.app/lucidchart/4d254dd4-5178-4f12-b253-93fe3c0b5113/edit?viewport_loc=-48%2C-116%2C2370%2C1211%2C0_0&invitationId=inv_27d0f7a2-9b17-49d8-be26-e25103165b68
