@@ -5,17 +5,15 @@ from bs4 import BeautifulSoup as BS
 
 def get_info(name: str, isurl: bool) -> dict:
     """
-    This Function Filters the User's Twitter Profile
-
-    Useful Information on Twitter Profile:
-        1.  Login Name : userid
+    This Function Filters the User's Mal Profile
+    Useful Information on Mal Profile:
+        1.  Work: work
         2.  Name: name
-        3.  Location: location
+        3.  College: college
         4.  Bio: bio
-
+        5.  School: school
     Should Look:
-        1.  https://twitter.com/<userid>
-
+        1.  https://myanimelist.net/profile/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,12 +21,12 @@ def get_info(name: str, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://twitter.com/{name}"
+        plink = f"https://myanimelist.net/profile/{name}"
     else:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.Firefox()
+    driver = webdriver.chrome()
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
@@ -37,23 +35,19 @@ def get_info(name: str, isurl: bool) -> dict:
     # Parsing HTML Source code to Extract Information
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
-
     # Target Real Name
-    info['name'] = soup.find_all('span')[17].string
-    # Target User ID
-    info['userid'] = soup.find_all('span')[25].string
-    # Target Bio
-    info['bio'] = soup.find_all('span')[26].string
-    # Target Location
-    info['location'] = soup.find_all('span')[28].string
-
+    info['name']= soup.find_all ('h1')[0].string
+    # Target Gender
+    info['gender'] = soup.find_all('span')[8].string
+    # Target Birthday
+    info['bday'] = soup.find_all('span')[10].string
+   
     return info
 
 
 def run(name: str, isurl: bool = False) -> dict:
     """
-    Run Twitter Info Check
-
+    Run Mal Info Check
     :param isurl:
     :param name:
     :return:
