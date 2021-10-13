@@ -170,9 +170,9 @@ def insert_User(User):
 
     
 ##USER##
-# def get_User_by(column, value):
-#     cur.execute("SELECT * FROM Users WHERE :column=:value", {'column': column, 'value': value})
-#     return cur.fetchall()
+def get_User_by(table, column, value):
+    cur.execute("SELECT * FROM :table WHERE :column=:value", {'table': table, 'column': column, 'value': value})
+    return cur.fetchall()
 
 def get_Users_data( column, value):
     cur.execute("SELECT * FROM Users WHERE :column=:value", {'column': column, 'value': value})
@@ -180,9 +180,9 @@ def get_Users_data( column, value):
 
 
 
-def print_Users_table():
+def print_Users_table(table):
     with con:
-        cur.execute("SELECT * FROM Users")
+        cur.execute("SELECT * FROM :table", {'table':table})
         print(cur.fetchall())
 
 User=User('Himanshu','Sharma','himanshu_otakuu','','','','','','')
@@ -193,9 +193,11 @@ insert_User(User)
 #get user 
 user1=get_Users_data('Last_Name','Sharma')
 
+# user1=get_User_by('Users','Last_Name','Sharma')
+
 print(user1)
 
-print_Users_table();
+print_Users_table('Users');
 # Save (commit) the changes
 con.commit()
 
