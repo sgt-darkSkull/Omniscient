@@ -83,6 +83,9 @@ print(label.description, '(%.2f%%)' % (label.score*100.))
 
     call_url = f"https://api.github.com/users/{name}"
     rq = requests.get(call_url)
+    if rq.status_code != 200:
+        return None
+
     js_obj = json.loads(rq.content.decode('utf-8'))
 
     info = dict()
