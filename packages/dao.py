@@ -315,39 +315,67 @@ def insert_User(User):
                          'Twit_userid': User.Twit_userid, 'Chef_userid': User.Chef_userid})
 
 
-##USER##
-def get_User_by(table, column, value):
-    cur.execute("SELECT * FROM :table WHERE :column=:value", {'table': table, 'column': column, 'value': value})
+def insert(table, dict):
+    column=''
+    values=''
+    for key in dict:
+        if(dict[key]!=''):
+            column += key+', '
+            values += "'" + dict[key]+ "'"+', '
+    column=column[:-2]
+    values=values[:-2]
+
+    cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+
+
+
+
+def get(table, column, where_column ,where_value):
+    cur.execute(f"SELECT {column} FROM {table} WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
 
-def get_Users_data(column, value):
-    cur.execute("SELECT * FROM Users WHERE :column=:value", {'column': column, 'value': value})
+def update(table, change_column, new_value, where_column, where_value):
+    cur.execute(f"UPDATE {table} SET {change_column} = \'{new_value}\' WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
 
-def print_Users_table(table):
-    with conn:
-        cur.execute(f"SELECT * FROM {table}")
-        print(cur.fetchall())
+def delete(table, where_column, where_value):
+    cur.execute(f"DELETE FROM {table} WHERE {where_column} = \'{where_value}\'")
+    return cur.fetchall()
+
 
 
 if __name__ == '__main__':
     main()
 
-    User = User('Himanshu', 'Sharma', 'himanshu_otakuu', '', '', '', '', '', '')
+    a_dict = {'First_Name': 'Himanshu', 'Last_Name': '', 'link_userid': '',
+                         'Face_userid': 'OP player', 'Insta_userid': 'dessNuts',
+                         'Git_userid': '', 'Hack_userid': 'hs1925846@gamil',
+                         'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'free_userid': 'nice'}
+    table='Users'
+    column='*'
+    change_column='Insta_userid'
+    new_value='Himanshu Otakuu7'
+    where_column='user_id'
+    where_value='15'
 
-    # Insert a User of data
-    insert_User(User)
+    #insert function
+    insert('Users',a_dict)
 
-    # get user
-    user1 = get_Users_data('Last_Name', 'Sharma')
+    #get function
+    print(get(table, column, where_column, where_value))
 
-    # user1=get_User_by('Users','Last_Name','Sharma')
+    #update functioning
+    update(table, change_column, new_value, where_column, where_value)
 
-    print(user1)
+    # update(table, 'Twit_userid', 'Badiya ek dum', 'Chef_userid', 'Yes d')
+    delete(table, 'user_id', '12')
 
-    print_Users_table('Users');
+    print(get(table, column, 'user_id', '12'))
+
+
+
     # Save (commit) the changes
     conn.commit()
 
