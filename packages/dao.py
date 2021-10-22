@@ -335,10 +335,18 @@ def get(table, column, where_column ,where_value):
     return cur.fetchall()
 
 
-def update(table, change_column, new_value, where_column, where_value):
+def update_one(table, change_column, new_value, where_column, where_value):
     cur.execute(f"UPDATE {table} SET {change_column} = \'{new_value}\' WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
+def update_bulk(table, dict, where_column, where_value):
+    str=''
+    for key in dict:
+        str+= key + "=" + "'" + dict[key] + "'" + ", " 
+
+    str=str[:-2]
+    print(f"UPDATE {table} SET {str} WHERE {where_column} = \'{where_value}\'")
+    cur.execute(f"UPDATE {table} SET {str} WHERE {where_column} = \'{where_value}\'")
 
 def delete(table, where_column, where_value):
     cur.execute(f"DELETE FROM {table} WHERE {where_column} = \'{where_value}\'")
@@ -353,6 +361,8 @@ if __name__ == '__main__':
                          'Face_userid': 'OP player', 'Insta_userid': 'dessNuts',
                          'Git_userid': '', 'Hack_userid': 'hs1925846@gamil',
                          'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'free_userid': 'nice'}
+    dict2= {'First_Name': 'Sumit', 'Last_Name': 'ha ha ', 'link_userid': '',
+                         'Face_userid': 'OPM player', 'Insta_userid': 'suckdessNuts'}
     table='Users'
     column='*'
     change_column='Insta_userid'
@@ -366,13 +376,17 @@ if __name__ == '__main__':
     #get function
     print(get(table, column, where_column, where_value))
 
-    #update functioning
-    update(table, change_column, new_value, where_column, where_value)
+    #update_one function
+    update_one(table, change_column, new_value, where_column, where_value)
+
+    #update_bulk
+    update_bulk(table, dict2, where_column, where_value)
 
     # update(table, 'Twit_userid', 'Badiya ek dum', 'Chef_userid', 'Yes d')
     delete(table, 'user_id', '12')
 
     print(get(table, column, 'user_id', '12'))
+    print(get(table, column, 'user_id', '15'))
 
 
 
