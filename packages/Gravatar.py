@@ -40,6 +40,7 @@ def get_info(name: str, isurl: bool) -> dict:
     # Target Gmail
     info['gmail'] = soup.find_all('a')[8].string
    
+   # not added to the database
     return info
 
 

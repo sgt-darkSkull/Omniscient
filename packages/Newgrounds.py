@@ -42,6 +42,7 @@ def get_info(name: str, isurl: bool) -> dict:
     # Target Location
     info['location'] = soup.find_all('span')[2].string
    
+   #not added in the database (gender_age)
     return info
 
 

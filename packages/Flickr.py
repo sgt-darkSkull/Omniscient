@@ -47,6 +47,8 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Country'] = soup.find_all('span')[24].string
     # Target Bio
     info['Bio'] = soup.find_all('span')[13].string    
+
+    # not added in database
    
     return info
 

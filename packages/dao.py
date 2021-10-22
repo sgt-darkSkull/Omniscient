@@ -19,7 +19,19 @@ def main():
         Git_userid text,
         Hack_userid text,
         Twit_userid text,
-        Chef_userid text
+        Chef_userid text,
+        Coro_userid text,
+        Dev_userid text,
+        Ello_userid text,
+        Free_userid text,
+        Hackaday_userid text,
+        Mal_userid text,
+        Pink_userid text,
+        Reddit_userid text,
+        Soundcloud_userid text,
+        Typeracer_userid text,
+        Ultimate_guitar_userid text,
+        Vimeo_userid text
         );
 
         ''')
@@ -29,6 +41,7 @@ def main():
        (Link_userid text NOT NULL PRIMARY KEY,
         Link_Fname text, 
         Link_Lname text,
+        Link_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -39,6 +52,7 @@ def main():
         Face_Lname text,
         Face_School text,
         Face_Collage text,
+        Face_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -49,6 +63,7 @@ def main():
         Insta_Lname text,
         Insta_bio text,
         Insta_Avatar text,
+        Insta_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -65,6 +80,7 @@ def main():
         Git_Followers text,
         Git_Job_Req text,
         Git_Avatar text,
+        Git_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -76,6 +92,7 @@ def main():
         Hack_location text,
         Hack_bio text,
         Hack_Institute text,
+        Hack_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -86,6 +103,7 @@ def main():
         Twit_Lname text,
         Twit_location text,
         Twit_bio text,
+        Twit_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
@@ -97,70 +115,193 @@ def main():
         Chef_location text,
         Chef_bio text,
         Chef_Institute text,
+        Chef_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
 
+        CREATE TABLE IF NOT EXISTS Coroflot
+       (Coro_userid text NOT NULL PRIMARY KEY,
+        Coro_Fname text, 
+        Coro_Lname text,
+        Coro_location text,
+        Coro_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Dev_community
+       (Dev_userid text NOT NULL PRIMARY KEY,
+        Dev_Fname text, 
+        Dev_Lname text,
+        Dev_location text,
+        Dev_bio text,
+        Dev_skills text,
+        Dev_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Ello
+       (Ello_userid text NOT NULL PRIMARY KEY,
+        Ello_Fname text, 
+        Ello_Lname text,
+        Ello_bio text,
+        Ello_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Freelancer
+       (Free_userid text NOT NULL PRIMARY KEY,
+        Free_Fname text, 
+        Free_Lname text,
+        Free_location text,
+        Free_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Hackaday
+       (Hackaday_userid text NOT NULL PRIMARY KEY,
+        Hackaday_Fname text, 
+        Hackaday_Lname text,
+        Hackaday_bio text,
+        Hackaday_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Mal
+       (Mal_userid text NOT NULL PRIMARY KEY,
+        Mal_Fname text, 
+        Mal_Lname text,
+        Mal_gender text,
+        Mal_Dob text,
+        Mal_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS Pinkbike
+       (Pink_userid text NOT NULL PRIMARY KEY,
+        Pink_Fname text, 
+        Pink_Lname text,
+        Pink_location text,
+        Pink_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Reddit
+       (Reddit_userid text NOT NULL PRIMARY KEY,
+        Reddit_Fname text, 
+        Reddit_Lname text,
+        Reddit_Dob text,
+        Reddit_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS Soundcloud
+       (Soundcloud_userid text NOT NULL PRIMARY KEY,
+        Soundcloud_Fname text, 
+        Soundcloud_Lname text,
+        Soundcloud_location text,
+        Soundcloud_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS Typeracer
+       (Typeracer_userid text NOT NULL PRIMARY KEY,
+        Typeracer_Fname text, 
+        Typeracer_Lname text,
+        Typeracer_gender text,
+        Typeracer_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+       CREATE TABLE IF NOT EXISTS Ultimate_guitar
+       (Ultimate_guitar_userid text NOT NULL PRIMARY KEY,
+        Ultimate_guitar_Fname text, 
+        Ultimate_guitar_Lname text,
+        Ultimate_guitar_Dob text,
+        Ultimate_guitar_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS Vimeo
+       (Vimeo_userid text NOT NULL PRIMARY KEY,
+        Vimeo_Fname text, 
+        Vimeo_Lname text,
+        Vimeo_location text,
+        Vimeo_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
 
         ''')
 
-    cur.executescript(
-        '''CREATE TABLE IF NOT EXISTS Link_Links
-       (Link_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Link_userid text,
-        FOREIGN KEY(Link_userid) REFERENCES Linkedin(Link_userid)
-        );  
+    # cur.executescript(
+    #     '''CREATE TABLE IF NOT EXISTS Link_Links
+    #    (Link_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Link_userid text,
+    #     FOREIGN KEY(Link_userid) REFERENCES Linkedin(Link_userid)
+    #     );  
 
-        CREATE TABLE IF NOT EXISTS Face_Links
-       (Face_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Face_userid text,
-        FOREIGN KEY(Face_Links_id) REFERENCES Face_Links(Face_Links_id)
-        ); 
+    #     CREATE TABLE IF NOT EXISTS Face_Links
+    #    (Face_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Face_userid text,
+    #     FOREIGN KEY(Face_Links_id) REFERENCES Face_Links(Face_Links_id)
+    #     ); 
 
-        CREATE TABLE IF NOT EXISTS Insta_Links
-       (Insta_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Insta_userid text,
-        FOREIGN KEY(Insta_Links_id) REFERENCES Insta_Links(Insta_Links_id)
-        ); 
+    #     CREATE TABLE IF NOT EXISTS Insta_Links
+    #    (Insta_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Insta_userid text,
+    #     FOREIGN KEY(Insta_Links_id) REFERENCES Insta_Links(Insta_Links_id)
+    #     ); 
 
-        CREATE TABLE IF NOT EXISTS Git_Links
-       (Git_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Git_userid text,
-        FOREIGN KEY(Git_Links_id) REFERENCES Git_Links(Git_Links_id)
-        ); 
+    #     CREATE TABLE IF NOT EXISTS Git_Links
+    #    (Git_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Git_userid text,
+    #     FOREIGN KEY(Git_Links_id) REFERENCES Git_Links(Git_Links_id)
+    #     ); 
 
-        CREATE TABLE IF NOT EXISTS Hack_Links
-       (Hack_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Hack_userid text,
-        FOREIGN KEY(Hack_Links_id) REFERENCES Hack_Links(Hack_Links_id)
-        ); 
+    #     CREATE TABLE IF NOT EXISTS Hack_Links
+    #    (Hack_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Hack_userid text,
+    #     FOREIGN KEY(Hack_Links_id) REFERENCES Hack_Links(Hack_Links_id)
+    #     ); 
 
-        CREATE TABLE IF NOT EXISTS Twit_Links
-       (Twit_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Twit_userid text,
-        FOREIGN KEY(Twit_Links_id) REFERENCES Twit_Links(Twit_Links_id)
-        ); 
+    #     CREATE TABLE IF NOT EXISTS Twit_Links
+    #    (Twit_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Twit_userid text,
+    #     FOREIGN KEY(Twit_Links_id) REFERENCES Twit_Links(Twit_Links_id)
+    #     ); 
 
-        CREATE TABLE IF NOT EXISTS Chef_Links
-       (Chef_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        Site text, 
-        URL text,
-        Chef_userid text,
-        FOREIGN KEY(Chef_Links_id) REFERENCES Chef_Links(Chef_Links_id)
-        ); 
-        ''')
+    #     CREATE TABLE IF NOT EXISTS Chef_Links
+    #    (Chef_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    #     Site text, 
+    #     URL text,
+    #     Chef_userid text,
+    #     FOREIGN KEY(Chef_Links_id) REFERENCES Chef_Links(Chef_Links_id)
+    #     ); 
+    #     ''')
 
 
 def insert_User(User):
