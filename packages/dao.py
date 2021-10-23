@@ -1,5 +1,5 @@
 import sqlite3
-from packages.User import User
+from packages.user_dao import User
 
 conn = sqlite3.connect('Database.sqlite3')
 cur = conn.cursor()

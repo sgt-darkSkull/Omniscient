@@ -48,8 +48,33 @@
 from colorama import Fore, Back, Style
 import argparse
 
-import packages.github
-from packages import *
+from packages import github, codechef, coroflot, dev_community, ello, \
+    face, flickr, freelancer, gravatar, hackaday, hackerrank, instagram, mal, \
+    newgrounds, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo
+
+
+def chain_run(username):
+    github.run(username)
+    codechef.run(username)
+    coroflot.run(username)
+    dev_community.run(username)
+    ello.run(username)
+    face.run(username)
+    flickr.run(username)
+    freelancer.run(username)
+    gravatar.run(username)
+    hackaday.run(username)
+    hackerrank.run(username)
+    instagram.run(username)
+    mal.run(username)
+    newgrounds.run(username)
+    pinkbike.run(username)
+    reddit.run(username)
+    soundcloud.run(username)
+    twitter.run(username)
+    typeracer.run(username)
+    ultimate_guitar.run(username)
+    vimeo.run(username)
 
 
 # LinkedIn Input Information Parser
@@ -68,15 +93,12 @@ def link_parser():
         lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
 
 
-def chain_run():
-    pass
-
-
 def run():
     pass
 
 
 if __name__ == '__main__':
+    chain_run('Ishikawa-riva')
     parser = argparse.ArgumentParser(
         description=Fore.GREEN + "Omniscient Passive Information Gatherer" + Style.RESET_ALL)
     parser.add_argument("-t", "--type", type=str,
