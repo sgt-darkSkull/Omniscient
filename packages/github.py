@@ -1,5 +1,6 @@
 import json
 import requests
+import dao
 
 
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
@@ -23,7 +24,7 @@ import requests
 # received_events_url	"https://api.github.com/users/<username>/received_events"
 
 
-def value_of(value: str) :
+def value_of(value: str):
     if value == '""' or value is None:
         return False
     else:
@@ -136,7 +137,7 @@ def run(name: str) -> dict:
     :return:
     """
 
-    return get_userinfo(name)
+    data = get_userinfo(name)
 
 
 if __name__ == '__main__':

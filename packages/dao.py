@@ -316,21 +316,19 @@ def insert_User(User):
 
 
 def insert(table, dict):
-    column=''
-    values=''
+    column = ''
+    values = ''
     for key in dict:
-        if(dict[key]!=''):
-            column += key+', '
-            values += "'" + dict[key]+ "'"+', '
-    column=column[:-2]
-    values=values[:-2]
+        if (dict[key] != ''):
+            column += key + ', '
+            values += "'" + dict[key] + "'" + ', '
+    column = column[:-2]
+    values = values[:-2]
 
     cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
 
 
-
-
-def get(table, column, where_column ,where_value):
+def get(table, column, where_column, where_value):
     cur.execute(f"SELECT {column} FROM {table} WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
@@ -339,47 +337,48 @@ def update_one(table, change_column, new_value, where_column, where_value):
     cur.execute(f"UPDATE {table} SET {change_column} = \'{new_value}\' WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
-def update_bulk(table, dict, where_column, where_value):
-    str=''
-    for key in dict:
-        str+= key + "=" + "'" + dict[key] + "'" + ", " 
 
-    str=str[:-2]
+def update_bulk(table, dict, where_column, where_value):
+    str = ''
+    for key in dict:
+        str += key + "=" + "'" + dict[key] + "'" + ", "
+
+    str = str[:-2]
     print(f"UPDATE {table} SET {str} WHERE {where_column} = \'{where_value}\'")
     cur.execute(f"UPDATE {table} SET {str} WHERE {where_column} = \'{where_value}\'")
+
 
 def delete(table, where_column, where_value):
     cur.execute(f"DELETE FROM {table} WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
 
-
 if __name__ == '__main__':
     main()
 
     a_dict = {'First_Name': 'Himanshu', 'Last_Name': '', 'link_userid': '',
-                         'Face_userid': 'OP player', 'Insta_userid': 'dessNuts',
-                         'Git_userid': '', 'Hack_userid': 'hs1925846@gamil',
-                         'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'free_userid': 'nice'}
-    dict2= {'First_Name': 'Sumit', 'Last_Name': 'ha ha ', 'link_userid': '',
-                         'Face_userid': 'OPM player', 'Insta_userid': 'suckdessNuts'}
-    table='Users'
-    column='*'
-    change_column='Insta_userid'
-    new_value='Himanshu Otakuu7'
-    where_column='user_id'
-    where_value='15'
+              'Face_userid': 'OP player', 'Insta_userid': 'dessNuts',
+              'Git_userid': '', 'Hack_userid': 'hs1925846@gamil',
+              'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'free_userid': 'nice'}
+    dict2 = {'First_Name': 'Sumit', 'Last_Name': 'ha ha ', 'link_userid': '',
+             'Face_userid': 'OPM player', 'Insta_userid': 'suckdessNuts'}
+    table = 'Users'
+    column = '*'
+    change_column = 'Insta_userid'
+    new_value = 'Himanshu Otakuu7'
+    where_column = 'user_id'
+    where_value = '15'
 
-    #insert function
-    insert('Users',a_dict)
+    # insert function
+    insert('Users', a_dict)
 
-    #get function
+    # get function
     print(get(table, column, where_column, where_value))
 
-    #update_one function
+    # update_one function
     update_one(table, change_column, new_value, where_column, where_value)
 
-    #update_bulk
+    # update_bulk
     update_bulk(table, dict2, where_column, where_value)
 
     # update(table, 'Twit_userid', 'Badiya ek dum', 'Chef_userid', 'Yes d')
@@ -387,8 +386,6 @@ if __name__ == '__main__':
 
     print(get(table, column, 'user_id', '12'))
     print(get(table, column, 'user_id', '15'))
-
-
 
     # Save (commit) the changes
     conn.commit()
