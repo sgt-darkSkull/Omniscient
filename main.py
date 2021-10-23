@@ -68,20 +68,12 @@ def link_parser():
         lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
 
 
-def gthub(username):
-    info = packages.github.run(username)
-    if info is None:
-        print("No Github User Account")
+def chain_run():
+    pass
 
 
-# Class Information of Target
-class Omniscient:
-
-    def __init__(self):
-        pass
-
-    def chain(self):
-        pass
+def run():
+    pass
 
 
 if __name__ == '__main__':
