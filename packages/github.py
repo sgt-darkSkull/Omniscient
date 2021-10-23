@@ -1,6 +1,6 @@
 import json
 import requests
-import dao
+from packages import dao
 
 
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
@@ -137,7 +137,7 @@ def run(name: str) -> dict:
     :return:
     """
 
-    data = get_userinfo(name)
+    return get_userinfo(name)
 
 
 if __name__ == '__main__':
