@@ -11,8 +11,7 @@ def main():
 
         '''CREATE TABLE IF NOT EXISTS Users
        (User_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-        First_Name text, 
-        Last_Name text,
+        Name text, 
         Link_userid text,
         Face_userid text,
         Insta_userid text,
@@ -31,7 +30,8 @@ def main():
         Soundcloud_userid text,
         Typeracer_userid text,
         Ultimate_guitar_userid text,
-        Vimeo_userid text
+        Vimeo_userid text,
+        Gravatar_userid text
         );
 
         ''')
@@ -39,8 +39,7 @@ def main():
     cur.executescript(
         '''CREATE TABLE IF NOT EXISTS Linkedin
        (Link_userid text NOT NULL PRIMARY KEY,
-        Link_Fname text, 
-        Link_Lname text,
+        Link_name text, 
         Link_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
@@ -48,21 +47,19 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Facebook
        (Face_userid text NOT NULL PRIMARY KEY,
-        Face_Fname text, 
-        Face_Lname text,
-        Face_School text,
-        Face_Collage text,
+        Face_name text, 
+        Face_school text,
+        Face_sollage text,
+        Face_work text,
         Face_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
 
         CREATE TABLE IF NOT EXISTS Instagram
-       (insta_userid text NOT NULL PRIMARY KEY,
-        Insta_Fname text, 
-        Insta_Lname text,
+       (Insta_userid text NOT NULL PRIMARY KEY,
+        Insta_name text, 
         Insta_bio text,
-        Insta_Avatar text,
         Insta_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
@@ -70,15 +67,14 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Github
        (Git_userid text NOT NULL PRIMARY KEY,
-        Git_Fname text, 
-        Git_Lname text,
-        Git_Location text,
+        Git_name text, 
+        Git_location text,
         Git_bio text,
-        Git_Company text,
-        Git_Email text,
-        Git_Blog text,
-        Git_Followers text,
-        Git_Job_Req text,
+        Git_company text,
+        Git_email text,
+        Git_blog text,
+        Git_followers text,
+        Git_job_Req text,
         Git_Avatar text,
         Git_link text,
         User_id text,
@@ -87,8 +83,7 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Hackerank
        (Hack_userid text NOT NULL PRIMARY KEY,
-        Hack_Fname text, 
-        Hack_Lname text,
+        Hack_name text, 
         Hack_location text,
         Hack_bio text,
         Hack_Institute text,
@@ -97,10 +92,9 @@ def main():
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
 
-        CREATE TABLE IF NOT EXISTS twitter
+        CREATE TABLE IF NOT EXISTS Twitter
        (Twit_userid text NOT NULL PRIMARY KEY,
-        Twit_Fname text, 
-        Twit_Lname text,
+        Twit_name text, 
         Twit_location text,
         Twit_bio text,
         Twit_link text,
@@ -110,8 +104,7 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Codechef
        (Chef_userid text NOT NULL PRIMARY KEY,
-        Chef_Fname text, 
-        Chef_Lname text,
+        Chef_name text, 
         Chef_location text,
         Chef_bio text,
         Chef_Institute text,
@@ -122,8 +115,7 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Coroflot
        (Coro_userid text NOT NULL PRIMARY KEY,
-        Coro_Fname text, 
-        Coro_Lname text,
+        Coro_name text, 
         Coro_location text,
         Coro_link text,
         User_id text,
@@ -132,8 +124,7 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Dev_community
        (Dev_userid text NOT NULL PRIMARY KEY,
-        Dev_Fname text, 
-        Dev_Lname text,
+        Dev_name text, 
         Dev_location text,
         Dev_bio text,
         Dev_skills text,
@@ -144,8 +135,7 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Ello
        (Ello_userid text NOT NULL PRIMARY KEY,
-        Ello_Fname text, 
-        Ello_Lname text,
+        Ello_name text, 
         Ello_bio text,
         Ello_link text,
         User_id text,
@@ -154,8 +144,7 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Freelancer
        (Free_userid text NOT NULL PRIMARY KEY,
-        Free_Fname text, 
-        Free_Lname text,
+        Free_name text, 
         Free_location text,
         Free_link text,
         User_id text,
@@ -164,8 +153,7 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Hackaday
        (Hackaday_userid text NOT NULL PRIMARY KEY,
-        Hackaday_Fname text, 
-        Hackaday_Lname text,
+        Hackaday_name text, 
         Hackaday_bio text,
         Hackaday_link text,
         User_id text,
@@ -174,10 +162,9 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Mal
        (Mal_userid text NOT NULL PRIMARY KEY,
-        Mal_Fname text, 
-        Mal_Lname text,
+        Mal_name text, 
         Mal_gender text,
-        Mal_Dob text,
+        Mal_dob text,
         Mal_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
@@ -185,8 +172,7 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Pinkbike
        (Pink_userid text NOT NULL PRIMARY KEY,
-        Pink_Fname text, 
-        Pink_Lname text,
+        Pink_name text, 
         Pink_location text,
         Pink_link text,
         User_id text,
@@ -195,9 +181,8 @@ def main():
 
        CREATE TABLE IF NOT EXISTS Reddit
        (Reddit_userid text NOT NULL PRIMARY KEY,
-        Reddit_Fname text, 
-        Reddit_Lname text,
-        Reddit_Dob text,
+        Reddit_name text, 
+        Reddit_dob text,
         Reddit_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
@@ -205,8 +190,7 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Soundcloud
        (Soundcloud_userid text NOT NULL PRIMARY KEY,
-        Soundcloud_Fname text, 
-        Soundcloud_Lname text,
+        Soundcloud_name text, 
         Soundcloud_location text,
         Soundcloud_link text,
         User_id text,
@@ -215,8 +199,7 @@ def main():
 
         CREATE TABLE IF NOT EXISTS Typeracer
        (Typeracer_userid text NOT NULL PRIMARY KEY,
-        Typeracer_Fname text, 
-        Typeracer_Lname text,
+        Typeracer_name text, 
         Typeracer_gender text,
         Typeracer_link text,
         User_id text,
@@ -224,21 +207,28 @@ def main():
         );
 
        CREATE TABLE IF NOT EXISTS Ultimate_guitar
-       (Ultimate_guitar_userid text NOT NULL PRIMARY KEY,
-        Ultimate_guitar_Fname text, 
-        Ultimate_guitar_Lname text,
-        Ultimate_guitar_Dob text,
-        Ultimate_guitar_link text,
+       (Guitar_userid text NOT NULL PRIMARY KEY,
+        Guitar_name text, 
+        Guitar_Dob text,
+        Guitar_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
 
         CREATE TABLE IF NOT EXISTS Vimeo
        (Vimeo_userid text NOT NULL PRIMARY KEY,
-        Vimeo_Fname text, 
-        Vimeo_Lname text,
+        Vimeo_name text, 
         Vimeo_location text,
         Vimeo_link text,
+        User_id text,
+        FOREIGN KEY(User_id) REFERENCES Users(User_id)
+        );
+
+        CREATE TABLE IF NOT EXISTS Gravatar
+       (Gravatar_userid text NOT NULL PRIMARY KEY,
+        Gravatar_name text, 
+        Gravatar_gmail text,
+        Gravatar_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
