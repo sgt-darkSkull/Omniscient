@@ -36,9 +36,11 @@ def get_info(name: str, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['name']= soup.find_all ('h2')[0].string
+    info['Soundcloud_name']= soup.find_all ('h2')[0].string
     # Target Location
-    info['location'] = soup.find_all('h3')[1].string
+    info['Soundcloud_location'] = soup.find_all('h3')[1].string
+    info['Soundcloud_link'] = plink
+    info['Soundcloud_userid'] = name
    
     return info
 

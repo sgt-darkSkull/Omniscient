@@ -36,11 +36,13 @@ def get_info(name: str, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['name']= soup.find_all ('h1')[0].string
+    info['Mal_name']= soup.find_all ('h1')[0].string
     # Target Gender
-    info['gender'] = soup.find_all('span')[8].string
+    info['Mal_gender'] = soup.find_all('span')[8].string
     # Target Birthday
-    info['bday'] = soup.find_all('span')[10].string
+    info['Mal_dob'] = soup.find_all('span')[10].string
+    info['Mal_link'] = plink
+    info['Mal_userid'] = name
    
     return info
 

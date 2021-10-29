@@ -49,7 +49,7 @@ def main():
        (Face_userid text NOT NULL PRIMARY KEY,
         Face_name text, 
         Face_school text,
-        Face_sollage text,
+        Face_collage text,
         Face_work text,
         Face_link text,
         User_id text,

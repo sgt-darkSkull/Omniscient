@@ -36,9 +36,11 @@ def get_info(name: str, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['name']= soup.find_all ('td')[27].string
+    info['Typeracer_name']= soup.find_all ('td')[27].string
     # Target Gender
-    info['gender'] = soup.find_all('td')[29].string
+    info['Typeracer_gender'] = soup.find_all('td')[29].string
+    info['Typeracer_link'] = plink
+    info['Typeracer_userid'] = name
    
     return info
 

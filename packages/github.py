@@ -57,27 +57,6 @@ def get_userinfo(name: str) -> dict:
         2.  https://api.github.com/users/<username>/subscriptions
         3.  https://api.github.com/users/<username>/events
 
-
-
-    HELP
-
-from __future__ import print_function
-from google.cloud import vision
-
-image_uri = 'gs://cloud-samples-data/vision/using_curl/shanghai.jpeg'
-
-client = vision.ImageAnnotatorClient()
-image = vision.Image()
-image.source.image_uri = image_uri
-
-response = client.label_detection(image=image)
-
-print('Labels (and confidence score):')
-print('=' * 30)
-for label in response.label_annotations:
-print(label.description, '(%.2f%%)' % (label.score*100.))
-
-
     :param name:
     :return info:
     """
@@ -112,6 +91,7 @@ print(label.description, '(%.2f%%)' % (label.score*100.))
 
     for key in js_obj:
         info[key] = js_obj[key] if value_of(js_obj[key]) else None
+    info['Git_link'] = call_url
 
     return info
 

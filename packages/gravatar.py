@@ -36,9 +36,11 @@ def get_info(name: str, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['name']= soup.find_all ('a')[7].string
+    info['Gravatar_name']= soup.find_all ('a')[7].string
     # Target Gmail
-    info['gmail'] = soup.find_all('a')[8].string
+    info['Gravatar_gmail'] = soup.find_all('a')[8].string
+    info['Gravatar_link'] = plink
+    info['Gravatar_userid'] = name
    
    # not added to the database
     return info

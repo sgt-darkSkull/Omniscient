@@ -33,11 +33,13 @@ def get_info(name: str, isurl: bool) -> dict:
     driver.close()
 
     # Target Real Name
-    info['name'] = driver.find_element_by_class_name('rhpdm').string
+    info['Insta_name'] = driver.find_element_by_class_name('rhpdm').string
     # Target User ID
-    info['userid'] = driver.find_element_by_class_name('_7UhW9       fKFbl yUEEX   KV-D4              fDxYl  ').string
+    info['Insta_userid'] = driver.find_element_by_class_name('_7UhW9       fKFbl yUEEX   KV-D4              fDxYl  ').string
     # Target Bio
-    info['bio'] = driver.find_element_by_class_name('-vDIg').string
+    info['Insta_bio'] = driver.find_element_by_class_name('-vDIg').string
+    info['Insta_link'] = plink
+    info['insta_userid'] = name
 
     return info
 

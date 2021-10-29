@@ -1,6 +1,7 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
+from packages import dao
 
 
 def get_info(name: str, isurl: bool) -> dict:
@@ -36,15 +37,17 @@ def get_info(name: str, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['name']= soup.find_all ('span')[8].string
+    info['Face_name']= soup.find_all ('span')[8].string
     # Target Bio
-    info['bio'] = soup.find_all('a')[9].string
+    info['Face_bio'] = soup.find_all('a')[9].string
     # Target school
-    info['school'] = soup.find_all('a')[5].string
+    info['Face_school'] = soup.find_all('a')[5].string
     # Target work
-    info['work'] = soup.find_all('a')[4].string
+    info['Face_work'] = soup.find_all('a')[4].string
     # Target college
-    info['college'] = soup.find_all('a')[6].string
+    info['Face_college'] = soup.find_all('a')[6].string
+    info['Face_link'] = plink
+    info['Face_userid'] = name
 
     return info
 
@@ -56,7 +59,7 @@ def run(name: str, isurl: bool = False) -> dict:
     :param name:
     :return:
     """
-    return get_info(name, isurl)
+    dao.insert("Facebook", get_info(name, isurl))
 
 
 if __name__ == '__main__':

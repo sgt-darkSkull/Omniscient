@@ -31,9 +31,11 @@ def get_info(name: str, isurl: bool) -> dict:
     info = dict()
 
     tag_span = soup.find_all('span')
-    info['userid'] = tag_span[5].string
-    info['location'] = tag_span[9].string+', '+tag_span[8].string+', '+tag_span[7].string
-    info['institute'] = tag_span[10].string
+    info['Chef_userid'] = tag_span[5].string
+    info['Chef_name'] = tag_span[5].string
+    info['Chef_location'] = tag_span[9].string+', '+tag_span[8].string+', '+tag_span[7].string
+    info['Chef_institute'] = tag_span[10].string
+    info['Chef_link'] = plink
 
     return info
 

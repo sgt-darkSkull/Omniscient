@@ -36,11 +36,12 @@ def get_info(name: str, isurl: bool) -> dict:
     sleep(10)
     info = dict()
 
-    info['name'] = soup.find_all('h1')[0].string
-    info['userid'] = soup.find_all('p')[0].string
-    info['bio'] = soup.find_all('p')[1].string
-    info['location'] = soup.find_all('p')[2].string
-    info['lnkid'] = soup.find_all('a', href=True)[8]['href']
+    info['Hack_name'] = soup.find_all('h1')[0].string
+    info['Hack_userid'] = soup.find_all('p')[0].string
+    info['Hack_bio'] = soup.find_all('p')[1].string
+    info['Hack_location'] = soup.find_all('p')[2].string
+    # info['Hack_lnkid'] = soup.find_all('a', href=True)[8]['href']
+    info['Hack_link'] = plink
 
     return info
 

@@ -39,13 +39,14 @@ def get_info(name: str, isurl: bool) -> dict:
     driver.close()
 
     # Target Real Name
-    info['name'] = soup.find_all('span')[17].string
+    info['Twit_name'] = soup.find_all('span')[17].string
     # Target User ID
-    info['userid'] = soup.find_all('span')[25].string
+    info['Twit_userid'] = soup.find_all('span')[25].string
     # Target Bio
-    info['bio'] = soup.find_all('span')[26].string
+    info['Twit_bio'] = soup.find_all('span')[26].string
     # Target Location
-    info['location'] = soup.find_all('span')[28].string
+    info['Twit_location'] = soup.find_all('span')[28].string
+    info['Twit_link'] = plink
 
     return info
 
