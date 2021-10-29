@@ -45,15 +45,14 @@ def get_info(name: str, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, isurl: bool = False) -> dict:
+def run(name: str, isurl: bool = False):
     """
     Run Coroflot Info Check
     :param isurl:
     :param name:
     :return:
     """
-    return get_info(name, isurl)
-
+    dao.insert('Coroflot', get_info(name, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

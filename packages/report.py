@@ -1,7 +1,6 @@
 # Python program to create
 # a pdf file
 
-
 from fpdf import FPDF
 
 

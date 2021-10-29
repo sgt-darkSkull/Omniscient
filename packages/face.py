@@ -52,7 +52,7 @@ def get_info(name: str, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, isurl: bool = False) -> dict:
+def run(name: str, isurl: bool = False):
     """
     Run Facebook Info Check
     :param isurl:

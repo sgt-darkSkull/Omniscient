@@ -81,7 +81,7 @@ def main():
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
         );
 
-        CREATE TABLE IF NOT EXISTS Hackerank
+        CREATE TABLE IF NOT EXISTS Hackerrank
        (Hack_userid text NOT NULL PRIMARY KEY,
         Hack_name text, 
         Hack_location text,
