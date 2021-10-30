@@ -38,7 +38,7 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Chef_location'] = tag_span[9].string+', '+tag_span[8].string+', '+tag_span[7].string
     info['Chef_institute'] = tag_span[10].string
     info['Chef_link'] = plink
-
+    dao.update()
     return info
 
 
@@ -50,6 +50,7 @@ def run(name: str, isurl: bool = False):
     :param isurl:
     :return:
     """
+
     dao.insert('Codechef', get_info(name, isurl))
 
 
