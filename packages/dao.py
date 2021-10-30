@@ -1,5 +1,5 @@
 import sqlite3
-from packages.user_dao import User
+# from packages.user_dao import User
 
 conn = sqlite3.connect('Database.sqlite3')
 cur = conn.cursor()
@@ -294,7 +294,7 @@ def main():
     #     ''')
 
 
-def insert_User(User):
+def insert_User():
     with conn:
         if (User.First_Name):
             cur.execute('''INSERT INTO Users (First_Name, Last_Name, link_userid, Face_userid, Insta_userid, Git_userid, Hack_userid, Twit_userid, Chef_userid)
@@ -342,6 +342,13 @@ def delete(table, where_column, where_value):
     cur.execute(f"DELETE FROM {table} WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
+def getuserid():
+    cur.execute(f"SELECT User_id FROM Users ORDER BY User_id DESC LIMIT 1")
+    return cur.fetchall()
+
+def droptable(table):
+    cur.execute(f"DROP TABLE {table}")
+    return cur.fetchall()
 
 if __name__ == '__main__':
     main()
@@ -359,23 +366,32 @@ if __name__ == '__main__':
     where_column = 'user_id'
     where_value = '15'
 
+    tables={'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef'}
     # insert function
-    insert('Users', a_dict)
+    insert('Users', {'Name': 'username'})
+
+    # for i in tables:
+    #     droptable(i)
+
 
     # get function
-    print(get(table, column, where_column, where_value))
+    # print(get(table, column, where_column, where_value))
 
     # update_one function
-    update_one(table, change_column, new_value, where_column, where_value)
+    # update_one(table, change_column, new_value, where_column, where_value)
 
     # update_bulk
-    update_bulk(table, dict2, where_column, where_value)
+    # update_bulk(table, dict2, where_column, where_value)
 
     # update(table, 'Twit_userid', 'Badiya ek dum', 'Chef_userid', 'Yes d')
-    delete(table, 'user_id', '12')
+    # delete(table, 'user_id', '12')
 
-    print(get(table, column, 'user_id', '12'))
-    print(get(table, column, 'user_id', '15'))
+    # print(get(table, column, 'user_id', '12'))
+    # print(get(table, column, 'user_id', '15'))
+
+    print(getuserid())
+
+
 
     # Save (commit) the changes
     conn.commit()

@@ -47,6 +47,7 @@
 
 from colorama import Fore, Back, Style
 import argparse
+from packages import dao
 
 from packages import github, codechef, coroflot, dev_community, ello, \
     face, flickr, freelancer, gravatar, hackaday, hackerrank, instagram, mal, \
@@ -54,7 +55,10 @@ from packages import github, codechef, coroflot, dev_community, ello, \
 
 
 def chain_run(username):
-    github.run(username)
+    dao.insert('Users', {'Name': 'username'})
+    user_id=int(dao.getuserid()[0][0])
+    # print(user_id)
+    # github.run(username)
     codechef.run(username)
     coroflot.run(username)
     dev_community.run(username)
@@ -110,6 +114,10 @@ if __name__ == '__main__':
     parser.add_argument("-d", "--domain", type=str, help=Fore.GREEN + "Target Domain Name" + Style.RESET_ALL)
 
     arg = parser.parse_args()
+
+    # dao.insert('Users', {'Name': 'username'})
+    # user_id=int(dao.getuserid()[0][0])
+    # print(user_id)
 
     if not arg.linkedin and arg.type.lower() == "person":
         link_parser()

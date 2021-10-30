@@ -1,0 +1,5 @@
+This example makes use of the header and footer methods to process page headers and footers. They are called automatically. They already exist in the FPDF class but do nothing, therefore we have to extend the class and override them.
+
+The logo is printed with the image method by specifying its upper-left corner and its width. The height is calculated automatically to respect the image proportions.
+
+To print the page number, a null value is passed as the cell width. It means that the cell should extend up to the right margin of the page; it is handy to center text. The current page number is returned by the page_no method; as for the total number of pages, it is obtained by means of the special value {nb} which will be substituted on document closure (provided you first called alias_nb_pages). Note the use of the set_y method which allows to set position at an absolute location in the page, starting from the top or the bottom.
