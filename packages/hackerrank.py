@@ -5,7 +5,7 @@ from time import sleep
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Hacker Rank Profile
 
@@ -44,11 +44,11 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Hack_location'] = soup.find_all('p')[2].string
     # info['Hack_lnkid'] = soup.find_all('a', href=True)[8]['href']
     info['Hack_link'] = plink
-
+    dao.update('Users', 'Hack_userid', info['Hack_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Hacker Rank Info Check
 
@@ -56,7 +56,7 @@ def run(name: str, isurl: bool = False):
     :param isurl:
     :return:
     """
-    dao.insert('Hackerrank', get_info(name, isurl))
+    dao.insert('Hackerrank', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run('AkashMahalik7'))

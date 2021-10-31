@@ -2,8 +2,9 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
+from packages import dao
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Coroflot Profile
     Useful Information on Coroflot Profile:
@@ -41,18 +42,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Coro_location'] = soup.find_all('div')[17].string
     info['Coro_link'] = plink
     info['Coro_userid'] = name
-
+    dao.update('Users', 'Coro_userid', info['Coro_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Coroflot Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Coroflot', get_info(name, isurl))
+    dao.insert('Coroflot', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Dev_Community Profile
     Useful Information on Dev_Community Profile:
@@ -49,18 +49,19 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Dev_bio'] = soup.find_all('p')[8].string
     info['Dev_link'] = plink
     info['Dev_userid'] = name
-   
+    dao.update('Users', 'Dev_userid', info['Dev_userid'], 'User_id', user_id)
+
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Dev_Community Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Dev_community', get_info(name, isurl))
+    dao.insert('Dev_community', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

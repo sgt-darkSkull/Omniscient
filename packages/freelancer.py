@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Freelancer Profile
     Useful Information on Freelancer Profile:
@@ -43,18 +43,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Free_location'] = soup.find_all('div')[53].string
     info['Free_link'] = plink
     info['Free_userid'] = name
-   
+    dao.update('Users', 'Free_userid', info['Free_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Freelancer Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Freelancer', get_info(name, isurl))
+    dao.insert('Freelancer', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

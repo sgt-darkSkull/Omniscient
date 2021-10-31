@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Hackaday Profile
     Useful Information on Hackaday Profile:
@@ -43,18 +43,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Hackaday_bio'] = soup.find_all('p')[0].string
     info['Hackaday_link'] = plink
     info['Hackaday_userid'] = name
-
+    dao.update('Users', 'Hackaday_userid', info['Hackaday_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Hackaday Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Hackaday', get_info(name, isurl))
+    dao.insert('Hackaday', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))
