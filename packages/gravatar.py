@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Gravatar Profile
     Useful Information on Gravatar Profile:
@@ -44,18 +44,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Gravatar_link'] = plink
     info['Gravatar_userid'] = name
    
-   # not added to the database
+    dao.update('Users', 'Gravatar_userid', info['Gravatar_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Gravatar Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Gravatar', get_info(name, isurl))
+    dao.insert('Gravatar', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

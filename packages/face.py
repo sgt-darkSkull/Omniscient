@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Facebook Profile
     Useful Information on facebook Profile:
@@ -48,18 +48,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Face_college'] = soup.find_all('a')[6].string
     info['Face_link'] = plink
     info['Face_userid'] = name
-
+    dao.update('Users', 'Face_userid', info['Face_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Facebook Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert("Facebook", get_info(name, isurl))
+    dao.insert("Facebook", get_info(name, user_id, isurl))
 
 
 if __name__ == '__main__':

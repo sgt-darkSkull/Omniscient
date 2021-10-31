@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Twitter Profile
 
@@ -49,11 +49,11 @@ def get_info(name: str, isurl: bool) -> dict:
     # Target Location
     info['Twit_location'] = soup.find_all('span')[28].string
     info['Twit_link'] = plink
-
+    dao.update('Users', 'Twit_userid', info['Twit_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Twitter Info Check
 
@@ -61,7 +61,7 @@ def run(name: str, isurl: bool = False):
     :param name:
     :return:
     """
-    dao.insert('Twitter', get_info(name, isurl))
+    dao.insert('Twitter', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

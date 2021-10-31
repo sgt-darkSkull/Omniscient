@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Code Chef Profile
 
@@ -38,11 +38,11 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Chef_location'] = tag_span[9].string+', '+tag_span[8].string+', '+tag_span[7].string
     info['Chef_institute'] = tag_span[10].string
     info['Chef_link'] = plink
-    dao.update()
+    dao.update('Users', 'Chef_userid', info['Chef_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Code Chef Info Check
 
@@ -50,8 +50,7 @@ def run(name: str, isurl: bool = False):
     :param isurl:
     :return:
     """
-
-    dao.insert('Codechef', get_info(name, isurl))
+    dao.insert('Codechef', get_info(name, user_id, isurl))
 
 
 if __name__ == '__main__':

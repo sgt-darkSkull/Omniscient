@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Ello Profile
     Useful Information on Ello Profile:
@@ -43,18 +43,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Ello_bio'] = soup.find_all('p')[0].string
     info['Ello_link'] = plink
     info['Ello_userid'] = name
-   
+    dao.update('Users', 'Ello_userid', info['Ello_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Ello Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Ello', get_info(name, isurl))
+    dao.insert('Ello', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

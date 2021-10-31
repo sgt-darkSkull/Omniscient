@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Ultimate-guitar Profile
     Useful Information on Ultimate-guitar Profile:
@@ -43,18 +43,18 @@ def get_info(name: str, isurl: bool) -> dict:
     info['Guitar_dob'] = soup.find_all('div')[57].string
     info['Guitar_link'] = plink
     info['Guitar_userid'] = name
-   
+    dao.update('Users', 'Guitar_userid', info['Guitar_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Ultimate-guitar Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Ultimate_guitar', get_info(name, isurl))
+    dao.insert('Ultimate_guitar', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup as BS
 from packages import dao
 
 
-def get_info(name: str, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
     This Function Filters the User's Instagram Profile
     Useful Information on Github Profile:
@@ -41,19 +41,19 @@ def get_info(name: str, isurl: bool) -> dict:
     # Target Bio
     info['Insta_bio'] = driver.find_element_by_class_name('-vDIg').string
     info['Insta_link'] = plink
-    info['insta_userid'] = name
-
+    info['Insta_userid'] = name
+    dao.update('Users', 'Insta_userid', info['Insta_userid'], 'User_id', user_id)
     return info
 
 
-def run(name: str, isurl: bool = False):
+def run(name: str, user_id: int, isurl: bool = False):
     """
     Run Twitter Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Instagram', get_info(name, isurl))
+    dao.insert('Instagram', get_info(name, user_id, isurl))
 
 
 if __name__ == '__main__':
