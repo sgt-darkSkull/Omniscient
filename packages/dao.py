@@ -66,16 +66,38 @@ def main():
         );
 
         CREATE TABLE IF NOT EXISTS Github
-       (Git_userid text NOT NULL PRIMARY KEY,
-        Git_name text, 
-        Git_location text,
-        Git_bio text,
-        Git_company text,
-        Git_email text,
-        Git_blog text,
-        Git_followers text,
-        Git_job_Req text,
-        Git_Avatar text,
+       (id text NOT NULL PRIMARY KEY,
+        login text, 
+        avatar_url text,
+        gravatar_id text,
+        url text,
+        html_url text,
+        followers_url text,
+        following_url text,
+        gists_url text,
+        starred_url text,
+        subscriptions_url text,
+        organizations_url text,
+        repos_url text,
+        events_url text,
+        received_events_url text,
+        name text,
+        type text,
+        site_admin text,
+        company text,
+        blog text,
+        location text,
+        email text,
+        hireable text,
+        bio text,
+        public_repos text,
+        public_gists text,
+        followers text,
+        twitter_username text,
+        following text,
+        created_at text,
+        updated_at text,
+        node_id text,
         Git_link text,
         User_id text,
         FOREIGN KEY(User_id) REFERENCES Users(User_id)
@@ -310,8 +332,8 @@ def insert(table, dict):
     values = ''
     for key in dict:
         if (dict[key] != ''):
-            column += key + ', '
-            values += "'" + dict[key] + "'" + ', '
+            column += str(key) + ', '
+            values += "'" + str(dict[key]) + "'" + ', '
     column = column[:-2]
     values = values[:-2]
 
@@ -389,7 +411,7 @@ if __name__ == '__main__':
     # print(get(table, column, 'user_id', '12'))
     # print(get(table, column, 'user_id', '15'))
 
-    print(getuserid())
+    # print(getuserid())
 
 
 

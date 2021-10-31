@@ -58,7 +58,7 @@ def chain_run(username):
     dao.insert('Users', {'Name': 'username'})
     user_id=int(dao.getuserid()[0][0])
     # print(user_id)
-    # github.run(username)
+    github.run(username, user_id)
     codechef.run(username, user_id)
     coroflot.run(username, user_id)
     dev_community.run(username, user_id)
