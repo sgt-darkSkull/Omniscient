@@ -1,4 +1,5 @@
 import sqlite3
+
 # from packages.user_dao import User
 
 conn = sqlite3.connect('Database.sqlite3')
@@ -316,18 +317,21 @@ def main():
     #     ''')
 
 
-def insert_User():
-    with conn:
-        if (User.First_Name):
-            cur.execute('''INSERT INTO Users (First_Name, Last_Name, link_userid, Face_userid, Insta_userid, Git_userid, Hack_userid, Twit_userid, Chef_userid)
-                        VALUES (:First_Name, :Last_Name, :link_userid, :Face_userid, :Insta_userid, :Git_userid, :Hack_userid, :Twit_userid, :Chef_userid)''',
-                        {'First_Name': User.First_Name, 'Last_Name': User.Last_Name, 'link_userid': User.Link_userid,
-                         'Face_userid': User.Face_userid, 'Insta_userid': User.Insta_userid,
-                         'Git_userid': User.Git_userid, 'Hack_userid': User.Hack_userid,
-                         'Twit_userid': User.Twit_userid, 'Chef_userid': User.Chef_userid})
+# def insert_User():
+#     with conn:
+#         if (User.First_Name):
+#             cur.execute('''INSERT INTO Users (First_Name, Last_Name, link_userid, Face_userid, Insta_userid, Git_userid, Hack_userid, Twit_userid, Chef_userid)
+#                         VALUES (:First_Name, :Last_Name, :link_userid, :Face_userid, :Insta_userid, :Git_userid, :Hack_userid, :Twit_userid, :Chef_userid)''',
+#                         {'First_Name': User.First_Name, 'Last_Name': User.Last_Name, 'link_userid': User.Link_userid,
+#                          'Face_userid': User.Face_userid, 'Insta_userid': User.Insta_userid,
+#                          'Git_userid': User.Git_userid, 'Hack_userid': User.Hack_userid,
+#                          'Twit_userid': User.Twit_userid, 'Chef_userid': User.Chef_userid})
 
 
 def insert(table, dict):
+
+    if dict == 'NODATARETURNED':
+        return
     column = ''
     values = ''
     for key in dict:
@@ -345,7 +349,7 @@ def get(table, column, where_column, where_value):
     return cur.fetchall()
 
 
-def update_one(table, change_column, new_value, where_column, where_value):
+def update(table, change_column, new_value, where_column, where_value):
     cur.execute(f"UPDATE {table} SET {change_column} = \'{new_value}\' WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
@@ -364,13 +368,16 @@ def delete(table, where_column, where_value):
     cur.execute(f"DELETE FROM {table} WHERE {where_column} = \'{where_value}\'")
     return cur.fetchall()
 
+
 def getuserid():
     cur.execute(f"SELECT User_id FROM Users ORDER BY User_id DESC LIMIT 1")
     return cur.fetchall()
 
+
 def droptable(table):
     cur.execute(f"DROP TABLE {table}")
     return cur.fetchall()
+
 
 if __name__ == '__main__':
     main()
@@ -388,13 +395,12 @@ if __name__ == '__main__':
     where_column = 'user_id'
     where_value = '15'
 
-    tables={'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef'}
+    tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef'}
     # insert function
     insert('Users', {'Name': 'username'})
 
     # for i in tables:
     #     droptable(i)
-
 
     # get function
     # print(get(table, column, where_column, where_value))
@@ -412,8 +418,6 @@ if __name__ == '__main__':
     # print(get(table, column, 'user_id', '15'))
 
     # print(getuserid())
-
-
 
     # Save (commit) the changes
     conn.commit()
