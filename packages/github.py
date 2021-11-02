@@ -1,7 +1,7 @@
 import json
 import requests
-from packages import dao
-
+# from packages import dao
+import dao
 
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
 # [-] INCOMPLETE : AI IMAGE RECOGNITION
@@ -32,7 +32,7 @@ def value_of(value: str):
 
 
 # User Profile Info Gatherer
-def get_userinfo(name: str) -> dict:
+def get_userinfo(name: str, user_id: int) -> dict:
     # https: // api.github.com / users / < username >
 
     """
@@ -92,7 +92,7 @@ def get_userinfo(name: str) -> dict:
     for key in js_obj:
         info[key] = js_obj[key] if value_of(js_obj[key]) else None
     info['Git_link'] = call_url
-
+    dao.update('Users', 'id', info['id'], 'User_id', user_id)
     return info
 
 
@@ -109,16 +109,16 @@ def get_following(name: str) -> list:
     return following
 
 
-def run(name: str):
+def run(name: str, user_id: int):
     """
     Run Github Info Check
 
     :param name:
     :return:
     """
-
-    dao.insert('Github', get_userinfo(name))
+    # return get_userinfo(name)
+    dao.insert('Github', get_userinfo(name, user_id))
 
 
 if __name__ == '__main__':
-    print(run(input()))
+    print(run('amarnath-arch'))
