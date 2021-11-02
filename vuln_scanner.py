@@ -67,8 +67,8 @@ def web_service_scan(target, port, ssl=False):
 
 
 def nmap_scan(target):
-    if os.geteuid() != 0:
-        return None, None
+    # if os.geteuid() != 0:
+    #     return None, None
 
     open_ports = get_open_ports_list(target)
 
@@ -80,7 +80,7 @@ def nmap_scan(target):
 
     print(Fore.BLUE + "[+] Network Scanning Completed \n" + Style.RESET_ALL)
 
-    with open('.temp.bin', 'r') as fp:
+    with open('.temp.bin' , 'r') as fp:
         data = fp.read()
 
     xml = BS(data, 'xml')
@@ -94,7 +94,7 @@ def nmap_scan(target):
 def run(target):
     ports, services = nmap_scan(target)
     if ports == 'NWSCANERR':
-        print(Fore.RED + f"[-] Using Brute Scanner for Top Services" + Style.RESET_ALL)
+        print(Fore.RED + f"[-] Using Brute Scanner for Web Services" + Style.RESET_ALL)
         print(Fore.RED + f"[*] Initiating Blind HTTP Web Scan On {target} .... [CONFIG : DEFAULT]" + Style.RESET_ALL)
         if web_service_scan(target,80):
             print('')
@@ -102,7 +102,7 @@ def run(target):
             web_service_scan(target,443, True)
         else:
             print('')
-            print(Fore.RED + f"[+] SSL Redirection is SET to TRUE, Skiping.. HTTPS Scan" + Style.RESET_ALL)
+            print(Fore.RED + f"[+] SSL Redirection is SET to TRUE, Skipping.. HTTPS Scan" + Style.RESET_ALL)
         print('')
     elif ports is not None:
         for i in range(len(services)):
@@ -111,9 +111,9 @@ def run(target):
                 flag = False
                 if 'https' in services[i]['name']:
                     flag = True
-                print(Fore.BLUE + "[*] Starting Scan for Web Vulnerabilities" + Style.RESET_ALL)
+                print(Fore.BLUE + f"[*] Starting Scan for Web Vulnerabilities for PORT : {ports[i]['portid']}" + Style.RESET_ALL)
                 web_service_scan(target, ports[i]['portid'], flag)
-                print(Fore.GREEN + "[+] Vulnerabilities Scan Completed\n" + Style.RESET_ALL)
+                print(Fore.GREEN + f"[+] Vulnerabilities Scan Completed for PORT : {ports[i]['portid']}\n" + Style.RESET_ALL)
     else:
         raise Exception("Require root Permissions")
 
@@ -121,7 +121,7 @@ def run(target):
 if __name__ == '__main__':
     # print(type(get_open_ports_list('127.0.0.1')))
     run('10.0.2.14')
-    run('techcrunch.com')
+    # run('techcrunch.com')
     # run('127.0.0.1')
     # run('facebook.com')
     # web_service_scan('10.0.2.14', '80')
