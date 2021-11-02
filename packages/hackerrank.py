@@ -5,7 +5,7 @@ from time import sleep
 from packages import dao
 
 
-def get_info(name: str, user_id: int, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool):
     """
     This Function Filters the User's Hacker Rank Profile
 
@@ -34,12 +34,16 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     src = driver.page_source
     driver.close()
+
+    if 'page not found' in src.lower():
+        return 'NODATARETURNED'
+
     soup = BS(src, 'html.parser')
     sleep(10)
     info = dict()
 
     info['Hack_name'] = soup.find_all('h1')[0].string
-    info['Hack_userid'] = soup.find_all('p')[0].string
+    info['Hack_userid'] = name  # soup.find_all('p')[0].string
     info['Hack_bio'] = soup.find_all('p')[1].string
     info['Hack_location'] = soup.find_all('p')[2].string
     # info['Hack_lnkid'] = soup.find_all('a', href=True)[8]['href']
@@ -58,5 +62,36 @@ def run(name: str, user_id: int, isurl: bool = False):
     """
     dao.insert('Hackerrank', get_info(name, user_id, isurl))
 
+
 if __name__ == '__main__':
-    print(run('AkashMahalik7'))
+    # {'Hack_name': 'Amar Nath', 'Hack_userid': None, 'Hack_bio': 'Student', 'Hack_location': 'India',
+    # 'Hack_link': 'https://www.hackerrank.com/19CBS1034'}
+    print(get_info('sgsdgsdshgea43gq', 1, False))
+    # print(get_info('AkashMahalik7', 1, False))
+    # print(get_info('19CBS1034',1, False))
+    # print(run('AkashMahalik7'))
+
+    # https://www.hackerrank.com/sgsdgsdshgea43gq
+    #
+    # from selenium import webdriver
+    # from bs4 import BeautifulSoup as BS
+    #
+    # link = "https://www.hackerrank.com/sgsdgsdshgea43gq"
+    # driver = webdriver.Firefox()
+    # driver.get(link)
+    # src = driver.page_source
+    # driver.close()
+    # soup = BS(src, 'html.parser')
+    # type(src)
+    # <
+    #
+    # class 'str'>
+    #
+    #
+    # '404' in src
+    # True
+    # 'page not found' in src.lower()
+    # True
+    # link = "https://www.hackerrank.com/19CBS1034"
+    # driver = webdriver.Firefox()
+    # driver.get(link)
