@@ -2,20 +2,20 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from packages import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
-    This Function Filters the User's Vimeo Profile
-    Useful Information on Vimeo Profile:
+    This Function Filters the User's Gravatar Profile
+    Useful Information on Gravatar Profile:
         1.  Work: work
         2.  Name: name
         3.  College: college
         4.  Bio: bio
         5.  School: school
     Should Look:
-        1.  https://vimeo.com/<userid>
+        1.  https://en.gravatar.com/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,7 +23,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://vimeo.com/{name}"
+        plink = f"https://en.gravatar.com/{name}"
     else:
         plink = name
 
@@ -38,23 +38,24 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['Vimeo_name']= soup.find_all ('div')[191].string
-    # Target Location
-    info['Vimeo_location'] = soup.find_all('div')[192].string
-    info['Vimeo_link'] = plink
-    info['Vimeo_userid'] = name
-    dao.update('Users', 'Vimeo_userid', info['Vimeo_userid'], 'User_id', user_id)
+    info['Gravatar_name']= soup.find_all ('a')[7].string
+    # Target Gmail
+    info['Gravatar_gmail'] = soup.find_all('a')[8].string
+    info['Gravatar_link'] = plink
+    info['Gravatar_userid'] = name
+   
+    dao.update('Users', 'Gravatar_userid', info['Gravatar_userid'], 'User_id', user_id)
     return info
 
 
 def run(name: str, user_id: int, isurl: bool = False):
     """
-    Run Vimeo Info Check
+    Run Gravatar Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Vimeo', get_info(name, user_id, isurl))
+    dao.insert('Gravatar', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

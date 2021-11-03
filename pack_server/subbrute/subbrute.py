@@ -65,7 +65,7 @@ class verify_nameservers(multiprocessing.Process):
         resolver.lifetime = 1
         try:
             #Lets test the letancy of our connection.
-            #Google's DNS server should be an ideal time test.
+            #Google's DNS pack_server should be an ideal time test.
             resolver.nameservers = ['8.8.8.8']
             resolver.query(self.most_popular_website, self.record_type)
         except:
@@ -110,7 +110,7 @@ class verify_nameservers(multiprocessing.Process):
                         else:
                             trace("Rejected nameserver - wildcard:", server)
                 except Exception as e:
-                    #Rejected server :(
+                    #Rejected pack_server :(
                     trace("Rejected nameserver - unreliable:", server, type(e)) 
         return added_resolver
 
@@ -134,7 +134,7 @@ class verify_nameservers(multiprocessing.Process):
         #We want sovle the following three problems:
         #1)The target might have a wildcard DNS record.
         #2)The target maybe using geolocaiton-aware DNS.
-        #3)The DNS server we are testing may respond to non-exsistant 'A' records with advertizements.
+        #3)The DNS pack_server we are testing may respond to non-exsistant 'A' records with advertizements.
         #I have seen a CloudFlare Enterprise customer with the first two conditions.
         try:
             #This is case #3,  these spam nameservers seem to be more trouble then they are worth.
@@ -273,7 +273,7 @@ class lookup(multiprocessing.Process):
                     if retries >= 3:
                         if retries > 3:
                             #Sometimes 'internal use' subdomains will timeout for every request.
-                            #As far as I'm concerned, the authorative name server has told us this domain exists,
+                            #As far as I'm concerned, the authorative name pack_server has told us this domain exists,
                             #we just can't know the address value using this method.
                             return ['Mutiple Query Timeout - External address resolution was restricted']
                         else:

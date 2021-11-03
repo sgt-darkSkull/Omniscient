@@ -2,20 +2,20 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from packages import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
-    This Function Filters the User's Mal Profile
-    Useful Information on Mal Profile:
+    This Function Filters the User's Ello Profile
+    Useful Information on Ello Profile:
         1.  Work: work
         2.  Name: name
         3.  College: college
         4.  Bio: bio
         5.  School: school
     Should Look:
-        1.  https://myanimelist.net/profile/<userid>
+        1.  https://ello.co/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,7 +23,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://myanimelist.net/profile/{name}"
+        plink = f"https://ello.co/{name}"
     else:
         plink = name
 
@@ -38,25 +38,23 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['Mal_name']= soup.find_all ('h1')[0].string
-    # Target Gender
-    info['Mal_gender'] = soup.find_all('span')[8].string
-    # Target Birthday
-    info['Mal_dob'] = soup.find_all('span')[10].string
-    info['Mal_link'] = plink
-    info['Mal_userid'] = name
-    dao.update('Users', 'Mal_userid', info['Mal_userid'], 'User_id', user_id)
+    info['Ello_name']= soup.find_all ('a')[0].string
+    # Target Bio
+    info['Ello_bio'] = soup.find_all('p')[0].string
+    info['Ello_link'] = plink
+    info['Ello_userid'] = name
+    dao.update('Users', 'Ello_userid', info['Ello_userid'], 'User_id', user_id)
     return info
 
 
 def run(name: str, user_id: int, isurl: bool = False):
     """
-    Run Mal Info Check
+    Run Ello Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Mal', get_info(name, user_id, isurl))
+    dao.insert('Ello', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

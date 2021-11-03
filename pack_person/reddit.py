@@ -2,20 +2,20 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from packages import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
-    This Function Filters the User's Pinkbike Profile
-    Useful Information on Pinkbike Profile:
+    This Function Filters the User's Reddit Profile
+    Useful Information on Reddit Profile:
         1.  Work: work
         2.  Name: name
         3.  College: college
         4.  Bio: bio
         5.  School: school
     Should Look:
-        1.  https://www.pinkbike.com/u/<userid>
+        1.  https://https://www.reddit.com/user/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,7 +23,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://www.pinkbike.com/u/{name}/"
+        plink = f"https://www.reddit.com/user/{name}"
     else:
         plink = name
 
@@ -38,23 +38,23 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['Pink_name']= soup.find_all ('h1')[0].string
-    # Target Location
-    info['Pink_location'] = soup.find_all('li')[33].string
-    info['Pink_link'] = plink
-    info['Pink_userid'] = name
-    dao.update('Users', 'Pink_userid', info['Pink_userid'], 'User_id', user_id)
+    info['Reddit_name']= soup.find_all ('a')[82].string
+    # Target Birthday
+    info['Reddit_dob'] = soup.find_all('span')[89].string
+    info['Reddit_link'] = plink
+    info['Reddit_userid'] = name
+    dao.update('Users', 'Reddit_userid', info['Reddit_userid'], 'User_id', user_id)
     return info
 
 
 def run(name: str, user_id: int, isurl: bool = False):
     """
-    Run Pinkbike Info Check
+    Run Reddit Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Pinkbike', get_info(name, user_id, isurl))
+    dao.insert('Reddit', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

@@ -2,20 +2,20 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from packages import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
-    This Function Filters the User's Typeracer Profile
-    Useful Information on Typeracer Profile:
+    This Function Filters the User's Freelancer Profile
+    Useful Information on Freelancer Profile:
         1.  Work: work
         2.  Name: name
         3.  College: college
         4.  Bio: bio
         5.  School: school
     Should Look:
-        1.  https://data.typeracer.com/pit/profile?user=<userid>
+        1.  https://www.freelancer.com/u/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,7 +23,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://data.typeracer.com/pit/profile?user={name}"
+        plink = f"https://www.freelancer.com/u/{name}"
     else:
         plink = name
 
@@ -38,23 +38,23 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['Typeracer_name']= soup.find_all ('td')[27].string
-    # Target Gender
-    info['Typeracer_gender'] = soup.find_all('td')[29].string
-    info['Typeracer_link'] = plink
-    info['Typeracer_userid'] = name
-    dao.update('Users', 'Typeracer_userid', info['Typeracer_userid'], 'User_id', user_id)
+    info['Free_name']= soup.find_all ('h3')[0].string
+    # Target Location
+    info['Free_location'] = soup.find_all('div')[53].string
+    info['Free_link'] = plink
+    info['Free_userid'] = name
+    dao.update('Users', 'Free_userid', info['Free_userid'], 'User_id', user_id)
     return info
 
 
 def run(name: str, user_id: int, isurl: bool = False):
     """
-    Run Typeracer Info Check
+    Run Freelancer Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Typeracer', get_info(name, user_id, isurl))
+    dao.insert('Freelancer', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

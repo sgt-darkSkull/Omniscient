@@ -2,20 +2,20 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from packages import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
-    This Function Filters the User's Hackaday Profile
-    Useful Information on Hackaday Profile:
+    This Function Filters the User's Soundcloud Profile
+    Useful Information on Soundcloud Profile:
         1.  Work: work
         2.  Name: name
         3.  College: college
         4.  Bio: bio
         5.  School: school
     Should Look:
-        1.  https://hackaday.io/David<userid>
+        1.  https://soundcloud.com/<userid>
     :param isurl:
     :param name:
     :return info:
@@ -23,7 +23,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     info = dict()
     if not isurl:
-        plink = f"https://hackaday.io/{name}"
+        plink = f"https://soundcloud.com/{name}"
     else:
         plink = name
 
@@ -38,23 +38,23 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
     # Target Real Name
-    info['Hackaday_name'] = soup.find_all('h1')[0].string
-    # Target Bio
-    info['Hackaday_bio'] = soup.find_all('p')[0].string
-    info['Hackaday_link'] = plink
-    info['Hackaday_userid'] = name
-    dao.update('Users', 'Hackaday_userid', info['Hackaday_userid'], 'User_id', user_id)
+    info['Soundcloud_name']= soup.find_all ('h2')[0].string
+    # Target Location
+    info['Soundcloud_location'] = soup.find_all('h3')[1].string
+    info['Soundcloud_link'] = plink
+    info['Soundcloud_userid'] = name
+    dao.update('Users', 'Soundcloud_userid', info['Soundcloud_userid'], 'User_id', user_id)
     return info
 
 
 def run(name: str, user_id: int, isurl: bool = False):
     """
-    Run Hackaday Info Check
+    Run Soundcloud Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Hackaday', get_info(name, user_id, isurl))
+    dao.insert('Soundcloud', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
     print(run(input()))

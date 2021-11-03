@@ -1,5 +1,5 @@
 from colorama import Fore, Back, Style
-from packages import github, codechef, coroflot, dev_community, ello, face, freelancer, gravatar, hackaday, \
+from pack_person import github, codechef, coroflot, dev_community, ello, face, freelancer, gravatar, hackaday, \
     hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, dao
 
 
