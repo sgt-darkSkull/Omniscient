@@ -1,7 +1,7 @@
 import json
 import requests
-# from packages import dao
-import dao
+from packages import dao
+# import dao
 
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
 # [-] INCOMPLETE : AI IMAGE RECOGNITION
