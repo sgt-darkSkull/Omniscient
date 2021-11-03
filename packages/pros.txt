@@ -1,4 +1,0 @@
-Another interesting feature is used here: the automatic page breaking. 
-As soon as a cell would cross a limit in the page (at 2 centimeters from the bottom by default), 
-a break is performed and the font restored. Although the header and footer select their own font (Arial), the body continues with Times. This mechanism of automatic restoration also applies to colors and line width.
-The limit which triggers page breaks can be set with set_auto_page_break.
