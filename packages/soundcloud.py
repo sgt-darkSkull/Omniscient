@@ -37,6 +37,12 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     # Parsing HTML Source code to Extract Information
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
+
+    title = soup.find('title')
+    
+    if name not in title.lower():
+        return'NODATARETURNED'
+        
     # Target Real Name
     info['Soundcloud_name']= soup.find_all ('h2')[0].string
     # Target Location

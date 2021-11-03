@@ -34,9 +34,19 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     # Approx Wait ( high speed internet required)
     time.sleep(15)  # 15 Seconds Sleep
 
+    src = driver.page_source
+    driver.close()
+
+
     # Parsing HTML Source code to Extract Information
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
+
+    title = soup.find('title')
+    
+    if name not in title.lower():
+        return'NODATARETURNED'
+
     # Target Real Name
     info['Mal_name']= soup.find_all ('h1')[0].string
     # Target Gender
@@ -59,4 +69,5 @@ def run(name: str, user_id: int, isurl: bool = False):
     dao.insert('Mal', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
+    # print(get_info('himanshu_otakuu', 1, False))
     print(run(input()))
