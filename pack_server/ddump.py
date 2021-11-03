@@ -3,7 +3,7 @@
 import sys
 import json
 import argparse
-from dnsdmpstr import dnsdmpstr
+from pack_server.dnsdmpstr import dnsdmpstr
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-u', help="target domain")
@@ -25,10 +25,8 @@ args = parser.parse_args()
 dnsdump = dnsdmpstr()
 
 
-
 def get_info(target: str):
-
-	"""
+    """
 	package structure:
 	{
 		hostsearch:
@@ -39,26 +37,19 @@ def get_info(target: str):
 	}
 	"""
 
+    info = dict()
+    info['hostsearch'] = dnsdump.hostsearch(target)
+    info['reversedns'] = dnsdump.reversedns(target)
+    info['dnslookup'] = dnsdump.dnslookup(target)
+    info['pagelinks'] = dnsdump.pagelinks(target)
+    info['httpheaders'] = dnsdump.httpheaders(target)
+
+    return info
 
 
+def run(domain_name: str) -> dict:
+    return get_info(domain_name)
 
 
-	info= dict()
-	info['hostsearch']=dnsdump.hostsearch(target)
-	info['reversedns']=dnsdump.reversedns(target)
-	info['dnslookup']=dnsdump.dnslookup(target)
-	info['pagelinks']=dnsdump.pagelinks(target)
-	info['httpheaders']=dnsdump.httpheaders(target)
-
-	return info
-
-
-
-
-
-def run(domain_name:str)->dict:
-		return get_info(domain_name)
-
-
-if __name__=="__main__":
-	 print(run('facebook.com'))
+if __name__ == "__main__":
+    print(run('facebook.com'))
