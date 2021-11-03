@@ -332,6 +332,7 @@ def insert(table, dict):
 
     if dict == 'NODATARETURNED':
         return
+
     column = ''
     values = ''
     for key in dict:
