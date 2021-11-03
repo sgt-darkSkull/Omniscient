@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as BS
 from time import sleep
 
 from packages import dao
+# import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -39,7 +40,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     sleep(10)
     info = dict()
 
-    title = soup.find('title')
+    title = soup.find('title').string
     
     if name not in title.lower():
         return'NODATARETURNED'
@@ -68,5 +69,5 @@ def run(name: str, user_id: int, isurl: bool = False):
 
 
 if __name__ == '__main__':
-    # print(get_info('himanshu_otakuu',1, False))
+    # print(get_info('himanshu_oakuu',1, False))
     print(get_info(input()))

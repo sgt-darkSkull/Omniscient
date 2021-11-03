@@ -42,7 +42,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
 
-    title = soup.find('title')
+    title = soup.find('title').string
     
     if name not in title.lower():
         return'NODATARETURNED'
