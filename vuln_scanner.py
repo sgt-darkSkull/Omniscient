@@ -118,7 +118,3 @@ def run(target):
                 print(Fore.GREEN + f"[+] Vulnerabilities Scan Completed for PORT : {ports[i]['portid']}\n" + Fore.RESET)
     else:
         raise Exception("Require root Permissions")
-
-
-if __name__ == '__main__':
-    run('10.0.2.14')
