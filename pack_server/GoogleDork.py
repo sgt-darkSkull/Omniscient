@@ -1,14 +1,7 @@
-try:
-    from googlesearch import search
-    from enum import Enum
-except ImportError:
-    print("Error importing search module...")
-
-
 def get_dorks(domain_name: str):
+    from googlesearch import search
     
     info=list()
-
     dork = domain_name
     amount = 100
     interval = 2
@@ -26,7 +19,3 @@ def get_dorks(domain_name: str):
 def run(domain_name: str):
     """returns list of the all the dorks"""
     return get_dorks(domain_name)
-
-
-if __name__ == "__main__":
-    print(run('facebook.com'))
