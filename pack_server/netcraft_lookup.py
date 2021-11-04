@@ -1,11 +1,9 @@
 import requests
 from bs4 import BeautifulSoup as BS
 from pprint import pprint
-import time
 
 
-def get_info(domain_name: str)->dict:
-
+def get_info(domain_name: str) -> dict:
     """
         packet_structure
         {
@@ -21,112 +19,75 @@ def get_info(domain_name: str)->dict:
 
     """
 
+    url = f"https://sitereport.netcraft.com/?url=http://www.{domain_name}"
 
-    url=f"https://sitereport.netcraft.com/?url=http://www.{domain_name}"
+    src = requests.get(url).content
+    soup = BS(src, 'html.parser')
 
-    src=requests.get(url).content
-    soup=BS(src,'html.parser')
+    info = dict()
 
-    info=dict()
+    # background info
+    section = soup.find_all('section', {"id": "background_table_section"})
 
-    #background info
-    section = soup.find_all('section',{"id": "background_table_section"})
-
-    info['background']={}
-    tables=section[0].findChildren('table',{"class": "table--list"})
-
-    for table in tables:
-        rows=table.findChildren('tr')
-        for row in rows:
-            title=row.findChildren('th')[0].text
-            description=row.findChildren('td')[0].text
-            info['background'][title]=description
-
-
-    
-    #network info
-
-    section = soup.find_all('section',{"id": "network_table_section"})
-    info['network']={}
-    tables=section[0].findChildren('table',{"class": "table--list"})
+    info['background'] = {}
+    tables = section[0].findChildren('table', {"class": "table--list"})
 
     for table in tables:
-        rows=table.findChildren('tr')
+        rows = table.findChildren('tr')
         for row in rows:
-            title=row.findChildren('th')[0].text
-            description=row.findChildren('td')[0].text
-            info['network'][title]=description
+            title = row.findChildren('th')[0].text
+            description = row.findChildren('td')[0].text
+            info['background'][title] = description
 
-    info['network']['ip_delegation']={}
-    ips=section[0].findChildren('b')
+    # network info
 
-    found_ips=[]
+    section = soup.find_all('section', {"id": "network_table_section"})
+    info['network'] = {}
+    tables = section[0].findChildren('table', {"class": "table--list"})
+
+    for table in tables:
+        rows = table.findChildren('tr')
+        for row in rows:
+            title = row.findChildren('th')[0].text
+            description = row.findChildren('td')[0].text
+            info['network'][title] = description
+
+    info['network']['ip_delegation'] = {}
+    ips = section[0].findChildren('b')
+
+    found_ips = []
 
     for ip in ips:
-        if len(ip.text)>1:
-            info['network']['ip_delegation'][ip.text]=[]
+        if len(ip.text) > 1:
+            info['network']['ip_delegation'][ip.text] = []
             found_ips.append(ip.text)
-    
 
-    tables=section[0].findChildren('table',{"class": "table-ipdel table--collapsible"})
+    tables = section[0].findChildren('table', {"class": "table-ipdel table--collapsible"})
 
-
-    ip_counter=0
-
-
+    ip_counter = 0
 
     for table in tables:
-        head=table.findChildren('thead')
-        body=table.findChildren('tbody')
-        body_rows=body[0].findChildren('tr')
-        head_row=head[0].findChildren('th')
+        head = table.findChildren('thead')
+        body = table.findChildren('tbody')
+        body_rows = body[0].findChildren('tr')
+        head_row = head[0].findChildren('th')
 
-        ip=found_ips[ip_counter]
-        ip_counter+=1
-
+        ip = found_ips[ip_counter]
+        ip_counter += 1
 
         for i in range(len(body_rows)):
-            table_cells=body_rows[i].findChildren('td')
+            table_cells = body_rows[i].findChildren('td')
             info['network']['ip_delegation'][ip].append({})
             for j in range(len(head_row)):
-                info['network']['ip_delegation'][ip][i][head_row[j].text]=table_cells[j].text
+                info['network']['ip_delegation'][ip][i][head_row[j].text] = table_cells[j].text
 
-
-
-    #hosting history
-
-    # info['HostingHistory']=[]
-
-    # section = soup.find_all('section',{"id": "history_table_section"})
-    # print(section)
-    # # division=section[0].findChildren('div',{"class": "section_content"})
-    # # table=division[0].findChildren('table')
-
-
-    # table=soup.find_all('table',{'class': "table-history table--collapsible"})
-    # print(table)
-
-    # head= table[0].findChildren('thead')
-    # head_row=head[0].findChildren('th')
-
-    # body=table[0].findChildren('tbody')
-    # body_rows=body[0].findChildren('tr')
-
-    # for i in range(len(body_rows)):
-    #     table_cells=body_rows[i].findChildren('td')
-    #     info['HostingHistory'].append({})
-    #     for  j in range(len(head_row)):
-    #         info['HostingHistory'][i][head_row[j].text]=table_cells[j].text
-    
     return info
 
 
-
-def run(domain_name: str)->dict:
+def run(domain_name: str) -> dict:
     return get_info(domain_name)
 
 
-
-if __name__=='__main__':
+if __name__ == '__main__':
     pprint(run('facebook.com'))
     # print(run('facebook.com'))

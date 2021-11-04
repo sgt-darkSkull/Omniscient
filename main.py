@@ -1,11 +1,8 @@
 from colorama import Fore, Back, Style
 import argparse
-import vuln_scanner
-import p_person_ig
-import p_server_ig
 
 
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(
         description=Fore.GREEN + "Omniscient Information Gatherer" + Fore.RESET)
     parser.add_argument("-A", "--active", help=Fore.BLUE + "For Active Scanning" + Fore.RESET, action="store_true")
@@ -18,9 +15,9 @@ if __name__ == '__main__':
     parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
     parser.add_argument("-T", "--type", type=str, help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
     parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)
-    parser.add_argument("--no-linkedin", help=Fore.GREEN + "Passive Person Scan, No linkedin data" + Fore.RESET, action="store_true")
+    parser.add_argument("--no-linkedin", help=Fore.GREEN + "Passive Person Scan, No linkedin data" + Fore.RESET,
+                        action="store_true")
     arg = parser.parse_args()
-    print(arg)
 
     if not arg.active and not arg.passive:
         print(Fore.RED + "Specify Active (-A) or Passive Scanning (-P), At least one ARG should be passed\nCheck Help "
@@ -32,23 +29,31 @@ if __name__ == '__main__':
         exit(-1)
 
     if arg.type in ['p', 'P'] and not arg.username:
-        print(Fore.RED + "Enter Username for Person, Scan\nCheck Help menu, -h" + Fore.RESET)
-        exit(-1)
+        arg.username = input("Username not Provided,\nEnter Username >>> " + Fore.RESET)
+
+    if arg.type in ['s', 'S'] and not arg.host:
+        arg.host = input("Host not Provided,\nEnter Host >>> " + Fore.RESET)
 
     if arg.active and arg.type in ['p', 'P']:
         print(Fore.RED + "Active Scanning is possible for Server only.\nNo need to specify" + Fore.RESET)
         exit(-1)
 
     if arg.active:
+        import vuln_scanner
+
+        if arg.host is None:
+            arg.host = input("Host Not Provided, \nEnter Remote Host Address to scan >>> ")
         vuln_scanner.run(arg.host)
 
     if arg.passive:
-
         if arg.type in ['s', 'S']:
-            p_server_ig.run(arg.host, arg.shkey)
-        if arg.type in ['p', 'P']:
-            p_person_ig.run(arg.username, arg.output, arg.no_linkedin)
+            import p_server_ig
 
+            p_server_ig.run(arg.host, arg.shkey)
+        elif arg.type in ['p', 'P']:
+            import p_person_ig
+
+            p_person_ig.run(arg.username, arg.output, arg.no_linkedin)
     # chain_run('Ishikawa-riva')
     #
     # # dao.insert('Users', {'Name': 'username'})
@@ -57,3 +62,11 @@ if __name__ == '__main__':
     #
     # if not arg.linkedin and arg.type.lower() == "person":
     #     link_parser()
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        print(e)
+        # print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)

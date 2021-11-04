@@ -29,11 +29,10 @@ def chain_run(username):
 
 # LinkedIn Input Information Parser
 def link_parser():
-    print(
-        Fore.RED + "For better results Follow The Target User on Linked in and save their profile info - " + Fore.RESET)
+    print(Fore.RED + "For better results Make connection with Target User on Linkedin and save their profile info - " + Fore.RESET)
     print(Fore.RED + "Give NA as input if Answer is not known.." + Fore.RESET)
     print('')
-    if input("Want to Input LinkedIN Information : ").lower() == ("y" or "yes"):
+    if input("Want to Input Linkedin Information : ").lower() == ("y" or "yes"):
         lname = input("Enter Target's Name, Full Name : ")
         lclg = input("Enter Target's College Name : ")
         email = input("Enter Target's Email : ")
@@ -43,7 +42,7 @@ def link_parser():
         lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
 
 
-def run(target, output, lreq = True):
-    if lreq:
+def run(target, output, lreq = False):
+    if not lreq:
         link_parser()
     chain_run(target)
