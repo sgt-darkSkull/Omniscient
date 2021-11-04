@@ -2,7 +2,8 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-from pack_person import dao
+import dao
+import requests
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -27,16 +28,15 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     else:
         plink = name
 
-    # Firefox Driver (Selenium)
-    driver = webdriver.chrome()
-    driver.get(plink)
-
-    # Approx Wait ( high speed internet required)
-    time.sleep(15)  # 15 Seconds Sleep
+    src=requests.get(plink).content
 
     # Parsing HTML Source code to Extract Information
-    soup = BS(driver.page_source, 'html.parser')
-    driver.close()
+    soup = BS(src, 'html.parser')
+
+    title = soup.find('title').string
+
+    if name.lower() not in title.lower():
+        return'NODATARETURNED'
     # Target Real Name
     info['Free_name']= soup.find_all ('h3')[0].string
     # Target Location
@@ -57,4 +57,6 @@ def run(name: str, user_id: int, isurl: bool = False):
     dao.insert('Freelancer', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
-    print(run(input()))
+    print(get_info('afdafdas', 1, False))
+    
+    

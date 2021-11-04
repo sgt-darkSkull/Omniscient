@@ -1,8 +1,9 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
+from webdriver_manager.chrome import ChromeDriverManager
 
-from pack_person import dao
+import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -28,7 +29,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
@@ -36,11 +37,11 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     # Parsing HTML Source code to Extract Information
     soup = BS(driver.page_source, 'html.parser')
-    driver.close()
+    driver.quit()
 
     title = soup.find('title').string
     
-    if name not in title.lower():
+    if name.lower() not in title.lower():
         return'NODATARETURNED'
         
     # Target Real Name
@@ -63,4 +64,5 @@ def run(name: str, user_id: int, isurl: bool = False):
     dao.insert('Ultimate_guitar', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
-    print(run(input()))
+    print(get_info('agvasdfalaqbsssssss', 1, False))
+    # print(run(input()))

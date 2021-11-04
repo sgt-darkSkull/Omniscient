@@ -1,8 +1,8 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
-
-from pack_person import dao
+from webdriver_manager.chrome import ChromeDriverManager
+import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -28,7 +28,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
@@ -38,9 +38,10 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
 
-    title = soup.find('title')
+    title = soup.find('title').string
     
-    if name not in title.lower():
+    
+    if name.lower() not in title.lower():
         return'NODATARETURNED'
         
     # Target Real Name
@@ -63,4 +64,5 @@ def run(name: str, user_id: int, isurl: bool = False):
     dao.insert('Soundcloud', get_info(name, user_id, isurl))
 
 if __name__ == '__main__':
-    print(run(input()))
+    print(get_info('afdagvbafd', 1, False))
+    # print(run(input()))

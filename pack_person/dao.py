@@ -30,7 +30,7 @@ def main():
         Reddit_userid text,
         Soundcloud_userid text,
         Typeracer_userid text,
-        Ultimate_guitar_userid text,
+        Guitar_userid text,
         Vimeo_userid text,
         Gravatar_userid text
         );
@@ -396,7 +396,7 @@ if __name__ == '__main__':
     where_column = 'user_id'
     where_value = '15'
 
-    tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef'}
+    tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef','Ultimate_guitar'}
     # insert function
     insert('Users', {'Name': 'username'})
 

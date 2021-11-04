@@ -1,8 +1,9 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
+from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
-from pack_person import dao
+import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -26,14 +27,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
     sleep(15)  # 15 Seconds Sleep
 
     src = driver.page_source
-    driver.close()
+    driver.quit()
 
     soup = BS(src, 'html.parser')
     sleep(10)
@@ -41,7 +42,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
 
     title = soup.find('title').string
     
-    if name not in title.lower():
+    if name.lower() not in title.lower():
         return'NODATARETURNED'
 
     # Target Real Name
@@ -69,5 +70,5 @@ def run(name: str, user_id: int, isurl: bool = False):
 
 if __name__ == '__main__':
     # print(get_info('himanshu_otakuu',1, False))
-    dao.insert('Instagram', get_info('himanshu_otakuu',1, False))
+    dao.insert('Instagram', get_info('gasfdsb',1, False))
     # print(get_info(input()))
