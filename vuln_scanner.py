@@ -1,6 +1,6 @@
 import subprocess, os
 from bs4 import BeautifulSoup as BS
-from colorama import Fore, Back, Style
+from colorama import Fore
 
 
 def get_open_ports_list(target):
@@ -69,8 +69,8 @@ def web_service_scan(target, port, ssl=False):
 
 
 def nmap_scan(target):
-    # if os.geteuid() != 0:
-    #     return None, None
+    if os.geteuid() != 0:
+        return None, None
 
     open_ports = get_open_ports_list(target)
 
@@ -121,10 +121,4 @@ def run(target):
 
 
 if __name__ == '__main__':
-    # print(type(get_open_ports_list('127.0.0.1')))
     run('10.0.2.14')
-    # run('techcrunch.com')
-    # run('127.0.0.1')
-    # run('facebook.com')
-    # web_service_scan('10.0.2.14', '80')
-    # web_service_scan('techcrunch.com', '443', True)
