@@ -1,4 +1,3 @@
-import colorama
 from colorama import Fore, Back, Style
 import argparse
 import vuln_scanner
@@ -18,8 +17,10 @@ if __name__ == '__main__':
                         help=Fore.RED + "Hostname/Domain Name, incase of Person Scan" + Fore.RESET)
     parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
     parser.add_argument("-T", "--type", type=str, help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
-    parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "" + Fore.RESET)
+    parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)
+    parser.add_argument("--no-linkedin", help=Fore.GREEN + "Passive Person Scan, No linkedin data" + Fore.RESET, action="store_true")
     arg = parser.parse_args()
+    print(arg)
 
     if not arg.active and not arg.passive:
         print(Fore.RED + "Specify Active (-A) or Passive Scanning (-P), At least one ARG should be passed\nCheck Help "
@@ -46,7 +47,7 @@ if __name__ == '__main__':
         if arg.type in ['s', 'S']:
             p_server_ig.run(arg.host, arg.shkey)
         if arg.type in ['p', 'P']:
-            p_person_ig.run(arg.username, arg.output)
+            p_person_ig.run(arg.username, arg.output, arg.no_linkedin)
 
     # chain_run('Ishikawa-riva')
     #
