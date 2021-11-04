@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup as BS
-from pprint import pprint
 
 
 def get_info(domain_name: str) -> dict:
@@ -40,7 +39,6 @@ def get_info(domain_name: str) -> dict:
             info['background'][title] = description
 
     # network info
-
     section = soup.find_all('section', {"id": "network_table_section"})
     info['network'] = {}
     tables = section[0].findChildren('table', {"class": "table--list"})
@@ -65,7 +63,6 @@ def get_info(domain_name: str) -> dict:
     tables = section[0].findChildren('table', {"class": "table-ipdel table--collapsible"})
 
     ip_counter = 0
-
     for table in tables:
         head = table.findChildren('thead')
         body = table.findChildren('tbody')
@@ -86,8 +83,3 @@ def get_info(domain_name: str) -> dict:
 
 def run(domain_name: str) -> dict:
     return get_info(domain_name)
-
-
-if __name__ == '__main__':
-    pprint(run('facebook.com'))
-    # print(run('facebook.com'))
