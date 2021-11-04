@@ -18,8 +18,3 @@ def run(target, sh_api):
     dork = GoogleDork.run(target)
     subdomains = sl3r.run(target)
     create_report(target, shdn, netcraft, dnsdump, dork, subdomains)
-    # print(target, shdn, netcraft, dnsdump, dork, subdomains)
-
-
-# if __name__ == '__main__':
-    # run('google.com', '0AN48qkw7sEMiY38K9lFut8BweZU8IBi')
