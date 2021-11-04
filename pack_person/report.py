@@ -2,6 +2,7 @@ from fpdf import FPDF
 
 title = '20000 Leagues Under the Seas'
 
+
 class PDF(FPDF):
     def header(self):
         # Arial bold 15
@@ -59,9 +60,11 @@ class PDF(FPDF):
         self.chapter_title(num, title)
         self.chapter_body(name)
 
-pdf = PDF()
-pdf.set_title(title)
-pdf.set_author('Jules Verne')
-pdf.print_chapter(1, 'A RUNAWAY REEF', 'runaway.txt')
-pdf.print_chapter(2, 'THE PROS AND CONS', 'pros.txt')
-pdf.output('GFG.pdf', 'F')
+
+if __name__ == '__main__':
+    pdf = PDF()
+    pdf.set_title(title)
+    pdf.set_author('Jules Verne')
+    pdf.print_chapter(1, 'A RUNAWAY REEF', 'runaway.txt')
+    pdf.print_chapter(2, 'THE PROS AND CONS', 'pros.txt')
+    pdf.output('GFG.pdf', 'F')
