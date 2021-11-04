@@ -54,14 +54,6 @@ def main():
             import p_person_ig
 
             p_person_ig.run(arg.username, arg.output, arg.no_linkedin)
-    # chain_run('Ishikawa-riva')
-    #
-    # # dao.insert('Users', {'Name': 'username'})
-    # # user_id=int(dao.getuserid()[0][0])
-    # # print(user_id)
-    #
-    # if not arg.linkedin and arg.type.lower() == "person":
-    #     link_parser()
 
 
 if __name__ == '__main__':
