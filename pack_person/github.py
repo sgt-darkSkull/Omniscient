@@ -64,7 +64,7 @@ def get_userinfo(name: str, user_id: int) -> dict:
     call_url = f"https://api.github.com/users/{name}"
     rq = requests.get(call_url)
     if rq.status_code != 200:
-        return None
+        return 'NODATARETURNED'
 
     js_obj = json.loads(rq.content.decode('utf-8'))
 
