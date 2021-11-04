@@ -6,7 +6,6 @@ from pack_person import github, codechef, coroflot, dev_community, ello, face, f
 def chain_run(username):
     dao.insert('Users', {'Name': 'username'})
     user_id = int(dao.getuserid()[0][0])
-    print(user_id)
     github.run(username, user_id)
     codechef.run(username, user_id)
     coroflot.run(username, user_id)
@@ -44,5 +43,7 @@ def link_parser():
         lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
 
 
-def run(target, output):
-    pass
+def run(target, output, lreq = True):
+    if lreq:
+        link_parser()
+    chain_run(target)
