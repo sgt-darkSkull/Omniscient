@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup as BS
-import pprint
 
 
 def get_info(domain_name: str) -> dict:
@@ -54,5 +53,3 @@ def run(domain_name: str) -> dict:
     return get_info(domain_name)
 
 
-if __name__ == '__main__':
-    print(run('facebook.com'))

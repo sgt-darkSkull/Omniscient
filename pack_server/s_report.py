@@ -70,35 +70,3 @@ class Report:
             md_img.write(imgfile)
 
         self.md.write(f"![Image-{o_name}](assets.md/{o_name})\n")
-
-    def parse_list(self, lst):
-
-        self.p_fix += 1
-        rstr = ''
-        for val in lst:
-            if isinstance(val, list):
-                val = self.parse_list(val)
-            elif isinstance(val, dict):
-                val = self.parse_dict(val)
-            rstr += '\t' * self.p_fix + clear(val) + '\n'
-        self.p_fix -= 1
-        return rstr
-
-    def parse_dict(self, dct):
-        self.p_fix += 1
-        rstr = ''
-        for ky in dct:
-            val = dct[ky]
-            if isinstance(val, list):
-                val = self.parse_list(val)
-            elif isinstance(val, dict):
-                val = self.parse_dict(val)
-            rstr += '\t' * self.p_fix + ky + ' : ' + clear(val) + '\n'
-        self.p_fix -= 1
-        return rstr
-
-    def gn_report(self, txt):
-        if isinstance(txt, dict):
-            return self.parse_dict(txt)
-        elif isinstance(txt, list):
-            return self.parse_list(txt)

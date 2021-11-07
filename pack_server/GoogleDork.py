@@ -19,5 +19,3 @@ def run(domain_name: str):
     """returns list of the all the dorks"""
     return get_dorks(domain_name)
 
-if __name__ == '__main__':
-    print(run('arowex.com'))
