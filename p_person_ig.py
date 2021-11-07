@@ -21,7 +21,7 @@ def chain_run(username):
     pinkbike.run(username, user_id)
     reddit.run(username, user_id)
     soundcloud.run(username, user_id)
-    twitter.run(username, user_id)
+    # twitter.run(username, user_id)
     typeracer.run(username, user_id)
     ultimate_guitar.run(username, user_id)
     vimeo.run(username, user_id)
