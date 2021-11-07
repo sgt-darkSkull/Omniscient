@@ -31,31 +31,45 @@ def create_report(host, dnlkup, s_domain, dorks, shdn, ntcraft):
 
     if dorks or f_dnslookup:
         rpt.add_hn(2, 'Links, You must look at')
-        if f_dnslookup:
-            rpt.add_cd(dnlkup['pagelinks'])
-        elif f_dnslookup and dorks:
+        if f_dnslookup and dorks:
             rpt.add_cd(dorks + '\n' + dnlkup['pagelinks'])
-        else:
+        elif f_dnslookup:
+            rpt.add_cd(dnlkup['pagelinks'])
+        elif dorks:
             rpt.add_cd(dorks)
+
+    with open(f'Reports/{name}.netcraft', 'w') as fd:
+        fd.write(ntcraft)
 
 
 def run(target, sh_api):
     netcraft = dnsdump = dork = subdomains = shdn = None
     try:
         if sh_api is not None:
-            shdn = shodan_lookup.run(target, sh_api)
+            try:
+                shdn = shodan_lookup.run(target, sh_api)
+            except:
+                pass
         else:
             print("SHODAN Scan Require API KEY, Register at https://shodan.io to get Your API Key")
-
-        # netcraft = netcraft_lookup.run(target)
-        dnsdump = ddump.run(target)
-        # dork = GoogleDork.run(target)
-        subdomains = sl3r.run(target)
+        try:
+            netcraft = netcraft_lookup.run(target)
+        except:
+            pass
+        try:
+            dnsdump = ddump.run(target)
+        except:
+            pass
+        try:
+            dork = GoogleDork.run(target)
+        except:
+            pass
+        try:
+            subdomains = sl3r.run(target)
+        except:
+            pass
     except:
         print(colorama.Fore.RED + "Check Your Internet Connectivity" + colorama.Fore.RESET)
     create_report(target, dnsdump, subdomains, dork, shdn, netcraft)
-    # create_report(target, shdn, '', 'dnsdump', 'dork', 'subdomains')
 
 
-if __name__ == '__main__':
-    print(sl3r.run('arowex.com'))
