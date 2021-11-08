@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-import dao
+from pack_person import dao
 import requests
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -55,14 +55,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Mal Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Mal', get_info(name, user_id, isurl))
+    dao.insert('Mal', get_info(name, user_id, isurl), rpt)
 
 if __name__ == '__main__':
     # print(get_info('himanshu_otakuu', 1, False))

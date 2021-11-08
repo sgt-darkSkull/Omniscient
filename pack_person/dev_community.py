@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-import dao
+from pack_person import dao
 import requests
 
 
@@ -56,14 +56,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Dev_Community Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Dev_community', get_info(name, user_id, isurl))
+    dao.insert('Dev_community', get_info(name, user_id, isurl), rpt)
 
 if __name__ == '__main__':
     # print(run(input()))

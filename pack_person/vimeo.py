@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from webdriver_manager.chrome import ChromeDriverManager
-import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -53,14 +53,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Vimeo Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Vimeo', get_info(name, user_id, isurl))
+    dao.insert('Vimeo', get_info(name, user_id, isurl), rpt)
 
 if __name__ == '__main__':
     print(get_info('David', 1, False))

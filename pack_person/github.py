@@ -109,7 +109,7 @@ def get_following(name: str) -> list:
     return following
 
 
-def run(name: str, user_id: int):
+def run(name: str, user_id: int, rpt):
     """
     Run Github Info Check
 
@@ -117,7 +117,7 @@ def run(name: str, user_id: int):
     :return:
     """
     # return get_userinfo(name)
-    dao.insert('Github', get_userinfo(name, user_id))
+    dao.insert('Github', get_userinfo(name, user_id), rpt)
 
 
 if __name__ == '__main__':

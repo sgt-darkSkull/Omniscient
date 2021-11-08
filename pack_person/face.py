@@ -1,7 +1,7 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
-import dao
+from pack_person import dao
 from webdriver_manager.chrome import ChromeDriverManager
 
 
@@ -60,14 +60,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Facebook Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert("Facebook", get_info(name, user_id, isurl))
+    dao.insert("Facebook", get_info(name, user_id, isurl), rpt)
 
 
 if __name__ == '__main__':

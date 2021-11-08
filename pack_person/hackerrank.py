@@ -52,7 +52,7 @@ def get_info(name: str, user_id: int, isurl: bool):
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Hacker Rank Info Check
 
@@ -60,7 +60,7 @@ def run(name: str, user_id: int, isurl: bool = False):
     :param isurl:
     :return:
     """
-    dao.insert('Hackerrank', get_info(name, user_id, isurl))
+    dao.insert('Hackerrank', get_info(name, user_id, isurl), rpt)
 
 
 if __name__ == '__main__':

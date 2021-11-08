@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as BS
 from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
-import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -58,14 +58,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Twitter Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Instagram', get_info(name, user_id, isurl))
+    dao.insert('Instagram', get_info(name, user_id, isurl), rpt)
 
 
 if __name__ == '__main__':

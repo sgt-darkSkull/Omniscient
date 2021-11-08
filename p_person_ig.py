@@ -1,30 +1,33 @@
 from colorama import Fore, Back, Style
-from pack_person import github, codechef, coroflot, dev_community, ello, face, freelancer, gravatar, hackaday, \
-    hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, dao
-
+from pack_person import p_report
+from pack_person import dao
+# from pack_person import github, codechef, coroflot, dev_community, ello, face, freelancer, gravatar, hackaday, \
+#     hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, dao
+from pack_person import dev_community, coroflot, github, ello,freelancer, hackerrank
 
 def chain_run(username):
-    dao.insert('Users', {'Name': 'username'})
+    rpt = p_report.Report("Reports\\", f'{username}.md', f"Omniscient Report for {username} \t\t\t")
+    dao.insertU('Users', {'Name': 'username'},)
     user_id = int(dao.getuserid()[0][0])
-    github.run(username, user_id)
-    codechef.run(username, user_id)
-    coroflot.run(username, user_id)
-    dev_community.run(username, user_id)
-    ello.run(username, user_id)
-    face.run(username, user_id)
-    freelancer.run(username, user_id)
-    gravatar.run(username, user_id)
-    hackaday.run(username, user_id)
-    hackerrank.run(username, user_id)
-    instagram.run(username, user_id)
-    mal.run(username, user_id)
-    pinkbike.run(username, user_id)
-    reddit.run(username, user_id)
-    soundcloud.run(username, user_id)
-    # twitter.run(username, user_id)
-    typeracer.run(username, user_id)
-    ultimate_guitar.run(username, user_id)
-    vimeo.run(username, user_id)
+    github.run(username, user_id, rpt)
+    # codechef.run(username, user_id, rpt)
+    coroflot.run(username, user_id, rpt)
+    dev_community.run(username, user_id, rpt)
+    ello.run(username, user_id, rpt)
+    # face.run(username, user_id, rpt)
+    freelancer.run(username, user_id, rpt)
+    # gravatar.run(username, user_id, rpt)
+    # hackaday.run(username, user_id, rpt)
+    hackerrank.run(username, user_id, rpt)
+    # instagram.run(username, user_id, rpt)
+    # mal.run(username, user_id, rpt)
+    # pinkbike.run(username, user_id, rpt)
+    # reddit.run(username, user_id, rpt)
+    # soundcloud.run(username, user_id, rpt)
+    # # twitter.run(username, user_id)
+    # typeracer.run(username, user_id, rpt)
+    # ultimate_guitar.run(username, user_id, rpt)
+    # vimeo.run(username, user_id, rpt)
 
 
 # LinkedIn Input Information Parser
@@ -45,4 +48,6 @@ def link_parser():
 def run(target, output, lreq = False):
     if not lreq:
         link_parser()
-    chain_run(target)
+    chain_run('David')
+    
+chain_run('David')

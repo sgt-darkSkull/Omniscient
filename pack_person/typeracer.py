@@ -2,7 +2,7 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
-import dao
+from pack_person import dao
 import requests
 from pprint import pprint
 
@@ -48,14 +48,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Typeracer Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Typeracer', get_info(name, user_id, isurl))
+    dao.insert('Typeracer', get_info(name, user_id, isurl), rpt)
 
 if __name__ == '__main__':
     pprint(get_info('stormprod', 1, False))

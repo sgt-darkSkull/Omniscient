@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as BS
 
-import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -49,7 +49,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Code Chef Info Check
 
@@ -57,7 +57,7 @@ def run(name: str, user_id: int, isurl: bool = False):
     :param isurl:
     :return:
     """
-    dao.insert('Codechef', get_info(name, user_id, isurl))
+    dao.insert('Codechef', get_info(name, user_id, isurl), rpt)
 
 
 if __name__ == '__main__':

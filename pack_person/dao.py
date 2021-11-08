@@ -1,4 +1,5 @@
 import sqlite3
+from pack_person import p_report
 
 # from pack_person.user_dao import User
 
@@ -16,7 +17,7 @@ def main():
         Link_userid text,
         Face_userid text,
         Insta_userid text,
-        Git_userid text,
+        id text,
         Hack_userid text,
         Twit_userid text,
         Chef_userid text,
@@ -257,7 +258,7 @@ def main():
         );
 
         ''')
-
+    
     # cur.executescript(
     #     '''CREATE TABLE IF NOT EXISTS Link_Links
     #    (Link_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -328,10 +329,31 @@ def main():
 #                          'Twit_userid': User.Twit_userid, 'Chef_userid': User.Chef_userid})
 
 
-def insert(table, dict):
-
+def insertU(table, dict):
+    
     if dict == 'NODATARETURNED':
         return
+
+
+    column = ''
+    values = ''
+    for key in dict:
+        if (dict[key] != ''):
+            column += str(key) + ', '
+            values += "'" + str(dict[key]) + "'" + ', '
+    column = column[:-2]
+    values = values[:-2]
+
+    cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+
+
+def insert(table, dict, rpt):
+    
+    if dict == 'NODATARETURNED':
+        return
+    
+    rpt.add_hn(2, table)
+    rpt.add_cd(p_report.p_dict(dict))
 
     column = ''
     values = ''
@@ -383,10 +405,10 @@ def droptable(table):
 if __name__ == '__main__':
     main()
 
-    a_dict = {'First_Name': 'Himanshu', 'Last_Name': '', 'link_userid': '',
+    a_dict = {'Name': 'Himanshu', 'link_userid': '',
               'Face_userid': 'OP player', 'Insta_userid': 'dessNuts',
               'Git_userid': '', 'Hack_userid': 'hs1925846@gamil',
-              'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'free_userid': 'nice'}
+              'Twit_userid': 'yes', 'Chef_userid': 'Yes d', 'Free_userid': 'nice'}
     dict2 = {'First_Name': 'Sumit', 'Last_Name': 'ha ha ', 'link_userid': '',
              'Face_userid': 'OPM player', 'Insta_userid': 'suckdessNuts'}
     table = 'Users'
@@ -398,7 +420,7 @@ if __name__ == '__main__':
 
     tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef','Ultimate_guitar'}
     # insert function
-    insert('Users', {'Name': 'username'})
+    insertU('Users', a_dict)
 
     # for i in tables:
     #     droptable(i)

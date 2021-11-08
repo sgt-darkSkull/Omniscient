@@ -3,7 +3,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 # from webdriver_manager.chrome import ChromeDriverManager
 
-import dao
+from pack_person import dao
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -60,7 +60,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     Run Twitter Info Check
 
@@ -68,7 +68,7 @@ def run(name: str, user_id: int, isurl: bool = False):
     :param name:
     :return:
     """
-    dao.insert('Twitter', get_info(name, user_id, isurl))
+    dao.insert('Twitter', get_info(name, user_id, isurl), rpt)
 
 
 if __name__ == '__main__':
