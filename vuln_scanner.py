@@ -1,6 +1,6 @@
 import subprocess, os
 from bs4 import BeautifulSoup as BS
-from colorama import Fore
+from colorama import Fore, Back, Style
 
 
 def get_open_ports_list(target):
@@ -117,4 +117,5 @@ def run(target):
                 web_service_scan(target, ports[i]['portid'], flag)
                 print(Fore.GREEN + f"[+] Vulnerabilities Scan Completed for PORT : {ports[i]['portid']}\n" + Fore.RESET)
     else:
-        raise Exception("Require root Permissions")
+        print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + f"\t  Require root Permissions  \t" + Style.RESET_ALL)
+        exit(-1)

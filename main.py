@@ -22,7 +22,7 @@ def main():
                             action="store_true")
         arg = parser.parse_args()
     except:
-        print(Fore.RED + 'Check Help Menu -h' + Fore.RESET)
+        # print(Fore.RED + 'Check Help Menu -h' + Fore.RESET)
         exit(-1)
 
     if not arg.active and not arg.passive:
