@@ -48,9 +48,27 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     # Target User ID
     info['Insta_userid'] = name
     # Target Bio
-    info['Insta_bio'] = soup.find_all('span')[1].string
+    info['Insta_bio'] = soup.find_all('span')[3].string
     info['Insta_link'] = plink
     info['Insta_userid'] = name
+    import instaloader, sys, os
+
+    sys.stdout = open(os.devnull, 'w')
+    mod=instaloader.Instaloader()
+    mod.download_profile(name, profile_pic_only=True)
+    sys.stdout = sys.__stdout__
+
+    if os.path.isdir(name):
+        for file in os.listdir(name):
+            if ('.jpg' or '.png') in file:
+                info['Insta_DP'] = file
+                with open(name+'/' + file,'rb') as fp:
+                    outf = open(file,'wb')
+                    outf.write(fp.read())
+                import shutil
+                shutil.rmtree(name)
+
+
 
     dao.update('Users', 'Insta_userid', info['Insta_userid'], 'User_id', user_id)
     return info

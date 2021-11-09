@@ -330,38 +330,49 @@ def main():
 
 
 def insertU(table, dict):
-    if dict == 'NODATARETURNED':
-        return
 
-    column = ''
-    values = ''
-    for key in dict:
-        if (dict[key] != ''):
-            column += str(key) + ', '
-            values += "'" + str(dict[key]) + "'" + ', '
-    column = column[:-2]
-    values = values[:-2]
+    try:
+        if dict == 'NODATARETURNED':
+            return
 
-    cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+        column = ''
+        values = ''
+        for key in dict:
+            if dict[key] != '':
+                column += str(key) + ', '
+                values += "'" + str(dict[key]) + "'" + ', '
+        column = column[:-2]
+        values = values[:-2]
+
+        cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+    except:
+        pass
 
 
 def insert(table, dict, rpt):
-    if dict == 'NODATARETURNED':
-        return
+    try:
+        if dict == 'NODATARETURNED':
+            return
 
-    rpt.add_hn(2, table)
-    rpt.add_cd(p_report.p_dict(dict))
+        rpt.add_hn(2, table)
+        c_data, ipath = p_report.p_dict(dict)
+        if ipath:
+            import random, string
+            rpt.add_img(ipath, str(table) + '_avatar_'+ random.choice(string.ascii_letters))
+        rpt.add_cd(c_data)
 
-    column = ''
-    values = ''
-    for key in dict:
-        if (dict[key] != ''):
-            column += str(key) + ', '
-            values += "'" + str(dict[key]) + "'" + ', '
-    column = column[:-2]
-    values = values[:-2]
+        column = ''
+        values = ''
+        for key in dict:
+            if dict[key] != '':
+                column += str(key) + ', '
+                values += "'" + str(dict[key]) + "'" + ', '
+        column = column[:-2]
+        values = values[:-2]
 
-    cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+        cur.execute(f"INSERT INTO {table} ({column}) VALUES ({values})")
+    except:
+        pass
 
 
 def get(table, column, where_column, where_value):

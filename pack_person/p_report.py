@@ -3,33 +3,46 @@ import os, re
 
 def p_list(lst, clr=False):
     rstr = ''
+    ipath = None
     for val in lst:
         if isinstance(val, list):
-            val = p_list(val)
+            val, ipath = p_list(val)
         elif isinstance(val, dict):
-            val = p_dict(val)
+            val, ipath = p_dict(val)
         if clr:
             rstr += re.sub(r'(\d)\1+', r'\1', str(val).strip()) + '\n'
         else:
             rstr += str(val) + '\n'
-    return rstr
+    return rstr, ipath
 
 
 def p_dict(dct, clr=False):
     rstr = ''
+    ipath= None
     for ky in dct:
         val = dct[ky]
         if isinstance(val, list):
-            val = p_list(val)
+            val, ipath = p_list(val)
         elif isinstance(val, dict):
-            val = p_dict(val)
+            val, ipath = p_dict(val)
         if clr:
             rstr += ky + ' : ' + re.sub(r'(\d)\1+', r'\1', str(val).strip()) + '\n'
-        if (str(val) != 'None'):
-            attribute = ''.join(ky.split('_')[-1])
-            res = attribute[0].upper() + attribute[1:]
-            rstr += res + ' : ' + clear(str(val)) + '\n'
-    return rstr
+        if str(val) != 'None':
+
+            if 'dp' in str(ky).lower():
+                ipath = str(val)
+            elif 'url' in str(ky).lower():
+                if 'avatars.githubusercontent.com' in str(val):
+                    import wget
+                    iname = wget.download(str(val))
+                    ipath = os.getcwd() + '/' + iname
+                else:
+                    pass
+            else:
+                attribute = ''.join(ky.split('_')[-1])
+                res = attribute[0].upper() + attribute[1:]
+                rstr += res + ' : ' + clear(str(val)) + '\n'
+    return rstr, ipath
 
 
 def clear(txt):
@@ -73,3 +86,5 @@ class Report:
             md_img.write(imgfile)
 
         self.md.write(f"![Image-{o_name}](assets.md/{o_name})\n")
+
+        os.remove(img_loc)
