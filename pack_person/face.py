@@ -66,7 +66,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert("Facebook", get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    print(get_info('amarnath', 1, False))

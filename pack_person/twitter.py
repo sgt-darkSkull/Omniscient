@@ -1,7 +1,6 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
-
 from pack_person import dao
 
 
@@ -68,8 +67,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Twitter', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    print(get_info('RealDMitchell', 1, False))
-    # print(run(input()))

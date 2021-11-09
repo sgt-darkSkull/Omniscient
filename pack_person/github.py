@@ -3,27 +3,6 @@ import requests
 from pack_person import dao
 
 
-# [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
-# [-] INCOMPLETE : AI IMAGE RECOGNITION
-
-# Profile API : https://api.github.com/users/<username>
-# Repos API : https://api.github.com/users/<username>/repos
-# Event API : https://api.github.com/users/<username>/events/public
-# avatar_url	"https://avatars.githubusercontent.com/u/<user-id>"
-# avatar_url	"https://avatars.githubusercontent.com/u/<user-id>"
-# url	"https://api.github.com/users/<username>"
-# html_url	"https://github.com/<username>"
-# followers_url	"https://api.github.com/users/<username>/followers"
-# following_url	"https://api.github.com/users/<username>/following{/other_user}"
-# gists_url	"https://api.github.com/users/<username>/gists{/gist_id}"
-# starred_url	"https://api.github.com/users/<username>/starred{/owner}{/repo}"
-# subscriptions_url	"https://api.github.com/users/<username>/subscriptions"
-# organizations_url	"https://api.github.com/users/<username>/orgs"
-# repos_url	"https://api.github.com/users/<username>/repos"
-# events_url	"https://api.github.com/users/<username>/events{/privacy}"
-# received_events_url	"https://api.github.com/users/<username>/received_events"
-
-
 def value_of(value: str):
     if value == '""' or value is None:
         return False
@@ -118,7 +97,3 @@ def run(name: str, user_id: int, rpt):
     """
     # return get_userinfo(name)
     dao.insert('Github', get_userinfo(name, user_id), rpt)
-
-
-if __name__ == '__main__':
-    print(run('amarnath-arch'))

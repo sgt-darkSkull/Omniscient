@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup as BS
-
 from pack_person import dao
 import requests
 
@@ -53,9 +52,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Ello', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    print(get_info('afdafds', 1, False))
-
-    # print(run(input()))

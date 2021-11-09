@@ -1,7 +1,6 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from time import sleep
-
 from pack_person import dao
 
 
@@ -65,9 +64,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Instagram', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    # print(get_info('himanshu_otakuu',1, False))
-    dao.insert('Instagram', get_info('gasfdsb', 1, False))
-    # print(get_info(input()))

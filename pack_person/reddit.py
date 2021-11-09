@@ -59,8 +59,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Reddit', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    print(get_info('afdafds', 1, False))
-    # print(run(input()))

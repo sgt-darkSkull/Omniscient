@@ -60,8 +60,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Vimeo', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    print(get_info('David', 1, False))
-    # print(run(input()))

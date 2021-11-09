@@ -1,5 +1,4 @@
 from bs4 import BeautifulSoup as BS
-
 from pack_person import dao
 import requests
 
@@ -36,15 +35,9 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     if name.lower() not in title.lower():
         return 'NODATARETURNED'
 
-    # Target Real Name
     info['Dev_name'] = soup.find_all('h1')[0].string
-    # Target Location
     info['Dev_location'] = soup.find_all('span')[14].string
-    # Target Skills
     info['Dev_skills'] = soup.find_all('p')[12].string
-    # Target Github
-    # info['Dev_git'] = soup.find_all('a')[28].string
-    # Target Bio
     info['Dev_bio'] = soup.find_all('p')[8].string
     info['Dev_link'] = plink
     info['Dev_userid'] = name
@@ -61,8 +54,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Dev_community', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    # print(run(input()))
-    print(get_info('David', 1, False))

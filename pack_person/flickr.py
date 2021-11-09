@@ -60,7 +60,3 @@ def run(name: str, user_id: int, isurl: bool = False) -> dict:
     :return:
     """
     return get_info(name, user_id, isurl)
-
-
-if __name__ == '__main__':
-    print(run(input()))

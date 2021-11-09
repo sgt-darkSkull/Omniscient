@@ -61,37 +61,3 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :return:
     """
     dao.insert('Hackerrank', get_info(name, user_id, isurl), rpt)
-
-
-if __name__ == '__main__':
-    # {'Hack_name': 'Amar Nath', 'Hack_userid': None, 'Hack_bio': 'Student', 'Hack_location': 'India',
-    # 'Hack_link': 'https://www.hackerrank.com/19CBS1034'}
-    print(get_info('sgsdgsdshgea43gq', 1, False))
-    # print(get_info('AkashMahalik7', 1, False))
-    # print(get_info('19CBS1034',1, False))
-    # print(run('AkashMahalik7'))
-
-    # https://www.hackerrank.com/sgsdgsdshgea43gq
-    #
-    # from selenium import webdriver
-    # from bs4 import BeautifulSoup as BS
-    #
-    # link = "https://www.hackerrank.com/sgsdgsdshgea43gq"
-    # driver = webdriver.Firefox()
-    # driver.get(link)
-    # src = driver.page_source
-    # driver.close()
-    # soup = BS(src, 'html.parser')
-    # type(src)
-    # <
-    #
-    # class 'str'>
-    #
-    #
-    # '404' in src
-    # True
-    # 'page not found' in src.lower()
-    # True
-    # link = "https://www.hackerrank.com/19CBS1034"
-    # driver = webdriver.Firefox()
-    # driver.get(link)
