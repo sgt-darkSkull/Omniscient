@@ -57,8 +57,8 @@ def main():
 
 
 if __name__ == '__main__':
-    # main()
-    try:
-        main()
-    except Exception as e:
-        print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)
+    main()
+    # try:
+    #     main()
+    # except Exception as e:
+    #     print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)

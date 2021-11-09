@@ -26,7 +26,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.chrome()
+    driver = webdriver.Firefox()
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
@@ -37,18 +37,18 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     driver.close()
 
     title = soup.find('title').string
-    
+
     if name not in title.lower():
-        return'NODATARETURNED'
-        
+        return 'NODATARETURNED'
+
     # Target Real Name
-    info['name']= soup.find_all ('a')[4].string
+    info['name'] = soup.find_all('a')[4].string
     # Target Gender/Age
     info['gender_age'] = soup.find_all('span')[0].string
     # Target Location
     info['location'] = soup.find_all('span')[2].string
-   
-   #not added in the database (gender_age)
+
+    # not added in the database (gender_age)
     return info
 
 

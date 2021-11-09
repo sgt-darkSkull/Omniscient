@@ -25,7 +25,7 @@ def p_dict(dct, clr=False):
             val = p_dict(val)
         if clr:
             rstr += ky + ' : ' + re.sub(r'(\d)\1+', r'\1', str(val).strip()) + '\n'
-        if(str(val) != 'None'):
+        if (str(val) != 'None'):
             attribute = ''.join(ky.split('_')[-1])
             res = attribute[0].upper() + attribute[1:]
             rstr += res + ' : ' + clear(str(val)) + '\n'
@@ -34,8 +34,9 @@ def p_dict(dct, clr=False):
 
 def clear(txt):
     txt = str(txt)
-    txt = txt.replace('�',' ').replace('\\\\', '\\').replace('\\n', '').replace("''", '').replace("\t", ' ').replace("\r",
-                                                                                                    '\n').strip().replace(
+    txt = txt.replace('�', ' ').replace('\\\\', '\\').replace('\\n', '').replace("''", '').replace("\t", ' ').replace(
+        "\r",
+        '\n').strip().replace(
         '  ', ' ')
     return txt
 

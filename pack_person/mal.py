@@ -1,9 +1,8 @@
-import time
-from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
 from pack_person import dao
 import requests
+
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
     """
@@ -27,7 +26,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     else:
         plink = name
 
-    src=requests.get(plink).content
+    src = requests.get(plink).content
 
     # Parsing HTML Source code to Extract Information
     soup = BS(src, 'html.parser')
@@ -35,16 +34,15 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     title = soup.find('title').string
 
     if name.lower() not in title.lower():
-        return'NODATARETURNED'
-
+        return 'NODATARETURNED'
 
     title = soup.find('title').string
-    
+
     if name not in title.lower():
-        return'NODATARETURNED'
+        return 'NODATARETURNED'
 
     # Target Real Name
-    info['Mal_name']= soup.find_all ('h1')[0].string
+    info['Mal_name'] = soup.find_all('h1')[0].string
     # Target Gender
     info['Mal_gender'] = soup.find_all('span')[8].string
     # Target Birthday
@@ -64,8 +62,8 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     """
     dao.insert('Mal', get_info(name, user_id, isurl), rpt)
 
+
 if __name__ == '__main__':
     # print(get_info('himanshu_otakuu', 1, False))
     # print(run(input()))
     print(get_info('himanshu_otakuu', 1, False))
-    

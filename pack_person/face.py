@@ -2,7 +2,6 @@ import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from pack_person import dao
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 def get_info(name: str, user_id: int, isurl: bool) -> dict:
@@ -28,7 +27,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
         plink = name
 
     # Firefox Driver (Selenium)
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver = webdriver.Firefox()
     driver.get(plink)
 
     # Approx Wait ( high speed internet required)
@@ -37,15 +36,14 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     # Parsing HTML Source code to Extract Information
     soup = BS(driver.page_source, 'html.parser')
     driver.close()
-    
+
     title = soup.find('title').string
-    
 
     if name.lower() not in title.lower():
-        return'NODATARETURNED'
-    
+        return 'NODATARETURNED'
+
     # Target Real Name
-    info['Face_name']= soup.find_all ('span')[8].string
+    info['Face_name'] = soup.find_all('span')[8].string
     # Target Bio
     info['Face_bio'] = soup.find_all('a')[9].string
     # Target school

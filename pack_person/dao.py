@@ -258,7 +258,7 @@ def main():
         );
 
         ''')
-    
+
     # cur.executescript(
     #     '''CREATE TABLE IF NOT EXISTS Link_Links
     #    (Link_Links_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -330,10 +330,8 @@ def main():
 
 
 def insertU(table, dict):
-    
     if dict == 'NODATARETURNED':
         return
-
 
     column = ''
     values = ''
@@ -348,10 +346,9 @@ def insertU(table, dict):
 
 
 def insert(table, dict, rpt):
-    
     if dict == 'NODATARETURNED':
         return
-    
+
     rpt.add_hn(2, table)
     rpt.add_cd(p_report.p_dict(dict))
 
@@ -418,7 +415,8 @@ if __name__ == '__main__':
     where_column = 'user_id'
     where_value = '15'
 
-    tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef','Ultimate_guitar'}
+    tables = {'Users', 'Linkedin', 'Facebook', 'Instagram', 'Github', 'Hackerrank', 'Twitter', 'Codechef',
+              'Ultimate_guitar'}
     # insert function
     insertU('Users', a_dict)
 

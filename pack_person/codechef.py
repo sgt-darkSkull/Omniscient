@@ -34,15 +34,15 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     title = soup.find('title').string
 
     if name.lower() not in title.lower():
-        return'NODATARETURNED'
-    
+        return 'NODATARETURNED'
+
     info = dict()
 
     tag_span = soup.find_all('span')
     info['Chef_userid'] = tag_span[5].string
     info['Chef_name'] = tag_span[5].string
-    info['Chef_location'] = tag_span[9].string+', ' + \
-        tag_span[8].string+', '+tag_span[7].string
+    info['Chef_location'] = tag_span[9].string + ', ' + \
+                            tag_span[8].string + ', ' + tag_span[7].string
     info['Chef_institute'] = tag_span[10].string
     info['Chef_link'] = plink
     dao.update('Users', 'Chef_userid', info['Chef_userid'], 'User_id', user_id)

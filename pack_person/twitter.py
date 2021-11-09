@@ -1,7 +1,6 @@
 import time
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
-# from webdriver_manager.chrome import ChromeDriverManager
 
 from pack_person import dao
 

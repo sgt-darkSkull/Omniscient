@@ -1,5 +1,3 @@
-import time
-from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 
 import requests
@@ -27,7 +25,7 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     else:
         plink = name
 
-    src=requests.get(plink).content
+    src = requests.get(plink).content
 
     # Parsing HTML Source code to Extract Information
     soup = BS(src, 'html.parser')
@@ -35,9 +33,9 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     title = soup.find('title').string
 
     if name.lower() not in title.lower():
-        return'NODATARETURNED'
+        return 'NODATARETURNED'
     # Target Real Name
-    info['name']= soup.find_all ('h1')[0].string
+    info['name'] = soup.find_all('h1')[0].string
     # Target Occupation
     info['occupation'] = soup.find_all('span')[18].string
     # Target Hometown
@@ -47,10 +45,10 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     # Target Country
     info['Country'] = soup.find_all('span')[24].string
     # Target Bio
-    info['Bio'] = soup.find_all('span')[13].string    
+    info['Bio'] = soup.find_all('span')[13].string
 
     # not added in database
-   
+
     return info
 
 

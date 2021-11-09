@@ -1,7 +1,7 @@
 import json
 import requests
 from pack_person import dao
-# import dao
+
 
 # [-] INCOMPLETE : PARSING FOR IF VALUE EXIST
 # [-] INCOMPLETE : AI IMAGE RECOGNITION
