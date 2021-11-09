@@ -82,5 +82,7 @@ def get_info(domain_name: str) -> dict:
 
 
 def run(domain_name: str) -> dict:
-    return get_info(domain_name)
+    ntcraft = get_info(domain_name)
+    with open(f'Reports/{domain_name}.netcraft', 'w') as fd:
+        fd.write(str(ntcraft))
 

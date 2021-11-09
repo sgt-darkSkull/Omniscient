@@ -18,6 +18,20 @@ def get_info(target: str):
     return info
 
 
-def run(domain_name: str) -> dict:
-    return get_info(domain_name)
+def run(domain_name: str, rpt) :
+    dnlkup = get_info(domain_name)
+    if dnlkup:
+        f_dnslookup = True
+        rpt.add_hn(2, 'DNS Lookups')
+        rpt.add_cd(dnlkup['dnslookup'])
+
+        rpt.add_hn(2, 'Domain Resoultion')
+        rpt.add_cd(dnlkup['rdns'])
+
+        rpt.add_hn(2, 'HTTP Headers')
+        rpt.add_cd(dnlkup['httpheaders'])
+
+        rpt.add_hn(2, 'Links, You must look at')
+        rpt.add_cd(dnlkup['pagelinks'])
+
 
