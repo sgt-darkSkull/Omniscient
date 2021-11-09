@@ -9,23 +9,23 @@ def chain_run(username):
     dao.insertU('Users', {'Name': 'username'}, )
     user_id = int(dao.getuserid()[0][0])
     github.run(username, user_id, rpt)
-    # codechef.run(username, user_id, rpt)
-    # coroflot.run(username, user_id, rpt)
-    # dev_community.run(username, user_id, rpt)
-    # ello.run(username, user_id, rpt)
-    # face.run(username, user_id, rpt)
-    # freelancer.run(username, user_id, rpt)
-    # gravatar.run(username, user_id, rpt)
-    # hackaday.run(username, user_id, rpt)
+    codechef.run(username, user_id, rpt)
+    coroflot.run(username, user_id, rpt)
+    dev_community.run(username, user_id, rpt)
+    ello.run(username, user_id, rpt)
+    face.run(username, user_id, rpt)
+    freelancer.run(username, user_id, rpt)
+    gravatar.run(username, user_id, rpt)
+    hackaday.run(username, user_id, rpt)
     hackerrank.run(username, user_id, rpt)
     instagram.run(username, user_id, rpt)
-    # mal.run(username, user_id, rpt)
-    # pinkbike.run(username, user_id, rpt)
-    # reddit.run(username, user_id, rpt)
-    # soundcloud.run(username, user_id, rpt)
-    # typeracer.run(username, user_id, rpt)
-    # ultimate_guitar.run(username, user_id, rpt)
-    # vimeo.run(username, user_id, rpt)
+    mal.run(username, user_id, rpt)
+    pinkbike.run(username, user_id, rpt)
+    reddit.run(username, user_id, rpt)
+    soundcloud.run(username, user_id, rpt)
+    typeracer.run(username, user_id, rpt)
+    ultimate_guitar.run(username, user_id, rpt)
+    vimeo.run(username, user_id, rpt)
 
 
 # LinkedIn Input Information Parser
@@ -48,7 +48,3 @@ def run(target, output, lreq=False):
     if not lreq:
         link_parser()
     chain_run(target)
-
-
-if __name__ == '__main__':
-    chain_run('akashmahalik7')
