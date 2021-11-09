@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup as BS
 import requests
-from pack_person import dao
+from pack_person import data_access_object
 
 
-def get_info(name: str, user_id: int, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool, dao) -> dict:
     """
     This Function Filters the User's Coroflot Profile
     Useful Information on Coroflot Profile:
@@ -44,12 +44,12 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, rpt, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False, dao = None):
     """
     Run Coroflot Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Coroflot', get_info(name, user_id, isurl), rpt)
+    dao.insert('Coroflot', get_info(name, user_id, isurl, dao), rpt)
 

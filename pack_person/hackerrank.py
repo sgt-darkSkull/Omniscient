@@ -2,10 +2,10 @@ from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from time import sleep
 
-from pack_person import dao
+from pack_person import data_access_object
 
 
-def get_info(name: str, user_id: int, isurl: bool):
+def get_info(name: str, user_id: int, isurl: bool, dao):
     """
     This Function Filters the User's Hacker Rank Profile
 
@@ -52,7 +52,7 @@ def get_info(name: str, user_id: int, isurl: bool):
     return info
 
 
-def run(name: str, user_id: int, rpt, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False, dao = None):
     """
     Run Hacker Rank Info Check
 
@@ -60,4 +60,4 @@ def run(name: str, user_id: int, rpt, isurl: bool = False):
     :param isurl:
     :return:
     """
-    dao.insert('Hackerrank', get_info(name, user_id, isurl), rpt)
+    dao.insert('Hackerrank', get_info(name, user_id, isurl, dao), rpt)

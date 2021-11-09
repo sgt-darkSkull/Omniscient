@@ -1,10 +1,10 @@
 from bs4 import BeautifulSoup as BS
-from pack_person import dao
+from pack_person import data_access_object
 import requests
 from pprint import pprint
 
 
-def get_info(name: str, user_id: int, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool, dao) -> dict:
     """
     This Function Filters the User's Typeracer Profile
     Useful Information on Typeracer Profile:
@@ -45,11 +45,11 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, rpt, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False, dao = None):
     """
     Run Typeracer Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Typeracer', get_info(name, user_id, isurl), rpt)
+    dao.insert('Typeracer', get_info(name, user_id, isurl, dao), rpt)

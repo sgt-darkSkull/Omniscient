@@ -1,31 +1,88 @@
 from colorama import Fore, Back, Style
 from pack_person import p_report
 from pack_person import github, codechef, coroflot, dev_community, ello, face, freelancer, gravatar, hackaday, \
-    hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, dao
+    hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, data_access_object
 
 
 def chain_run(username):
+    dao = data_access_object.DAO()
+    dao.main()
     rpt = p_report.Report("Reports/", f'{username}.md', f"Omniscient Report for {username} \t\t\t")
     dao.insertU('Users', {'Name': 'username'}, )
     user_id = int(dao.getuserid()[0][0])
-    github.run(username, user_id, rpt)
-    codechef.run(username, user_id, rpt)
-    coroflot.run(username, user_id, rpt)
-    dev_community.run(username, user_id, rpt)
-    ello.run(username, user_id, rpt)
-    face.run(username, user_id, rpt)
-    freelancer.run(username, user_id, rpt)
-    gravatar.run(username, user_id, rpt)
-    hackaday.run(username, user_id, rpt)
-    hackerrank.run(username, user_id, rpt)
-    instagram.run(username, user_id, rpt)
-    mal.run(username, user_id, rpt)
-    pinkbike.run(username, user_id, rpt)
-    reddit.run(username, user_id, rpt)
-    soundcloud.run(username, user_id, rpt)
-    typeracer.run(username, user_id, rpt)
-    ultimate_guitar.run(username, user_id, rpt)
-    vimeo.run(username, user_id, rpt)
+    try:
+        github.run(username, user_id, rpt, dao)
+    except:
+        pass
+    try:
+        codechef.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        coroflot.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        dev_community.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        ello.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        face.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        freelancer.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        gravatar.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        hackaday.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        hackerrank.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        instagram.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        mal.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        pinkbike.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        reddit.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        soundcloud.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        typeracer.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        ultimate_guitar.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    try:
+        vimeo.run(username, user_id, rpt, False, dao)
+    except:
+        pass
+    dao.conn.close()
 
 
 # LinkedIn Input Information Parser
@@ -44,7 +101,8 @@ def link_parser():
         lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
 
 
-def run(target, output, lreq=False):
+def run(target, output= None, lreq=False):
     if not lreq:
         link_parser()
     chain_run(target)
+

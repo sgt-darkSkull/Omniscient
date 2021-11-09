@@ -39,7 +39,7 @@ def create_report(host, dnlkup, s_domain, dorks, shdn, ntcraft):
             rpt.add_cd(dorks)
 
     with open(f'Reports/{name}.netcraft', 'w') as fd:
-        fd.write(ntcraft)
+        fd.write(str(ntcraft))
 
 
 def run(target, sh_api):

@@ -1,6 +1,6 @@
 # Omniscient Report for David 			
 ## Github
-![Image-avatar](assets.md/avatar)
+![Image-Github_avatar_l](assets.md/Github_avatar_l)
 ```
 Login : david
 Id : 293
@@ -124,8 +124,6 @@ Userid : David
 
 ## Vimeo
 ```
-Name : David Cho
-Location : David Cho
 Link : https://vimeo.com/David
 Userid : David
 

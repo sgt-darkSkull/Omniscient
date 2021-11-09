@@ -1,6 +1,6 @@
 import json
 import requests
-from pack_person import dao
+from pack_person import data_access_object
 
 
 def value_of(value: str):
@@ -11,7 +11,7 @@ def value_of(value: str):
 
 
 # User Profile Info Gatherer
-def get_userinfo(name: str, user_id: int) -> dict:
+def get_userinfo(name: str, user_id: int, dao) -> dict:
     # https: // api.github.com / users / < username >
 
     """
@@ -88,7 +88,7 @@ def get_following(name: str) -> list:
     return following
 
 
-def run(name: str, user_id: int, rpt):
+def run(name: str, user_id: int, rpt, dao = None):
     """
     Run Github Info Check
 
@@ -96,4 +96,4 @@ def run(name: str, user_id: int, rpt):
     :return:
     """
     # return get_userinfo(name)
-    dao.insert('Github', get_userinfo(name, user_id), rpt)
+    dao.insert('Github', get_userinfo(name, user_id, dao), rpt)

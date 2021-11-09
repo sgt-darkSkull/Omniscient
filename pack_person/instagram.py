@@ -1,10 +1,10 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup as BS
 from time import sleep
-from pack_person import dao
+from pack_person import data_access_object
 
 
-def get_info(name: str, user_id: int, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool, dao) -> dict:
     """
     This Function Filters the User's Instagram Profile
     Useful Information on Github Profile:
@@ -74,11 +74,11 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, rpt, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False, dao = None):
     """
     Run Twitter Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Instagram', get_info(name, user_id, isurl), rpt)
+    dao.insert('Instagram', get_info(name, user_id, isurl, dao), rpt)

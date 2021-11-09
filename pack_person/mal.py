@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup as BS
-from pack_person import dao
+from pack_person import data_access_object
 import requests
 
 
-def get_info(name: str, user_id: int, isurl: bool) -> dict:
+def get_info(name: str, user_id: int, isurl: bool, dao) -> dict:
     """
     This Function Filters the User's Mal Profile
     Useful Information on Mal Profile:
@@ -52,11 +52,11 @@ def get_info(name: str, user_id: int, isurl: bool) -> dict:
     return info
 
 
-def run(name: str, user_id: int, rpt, isurl: bool = False):
+def run(name: str, user_id: int, rpt, isurl: bool = False, dao = None):
     """
     Run Mal Info Check
     :param isurl:
     :param name:
     :return:
     """
-    dao.insert('Mal', get_info(name, user_id, isurl), rpt)
+    dao.insert('Mal', get_info(name, user_id, isurl, dao), rpt)

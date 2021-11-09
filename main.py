@@ -1,3 +1,4 @@
+import sys
 from colorama import Fore, Back, Style
 import argparse
 
@@ -22,17 +23,17 @@ def main():
                             action="store_true")
         arg = parser.parse_args()
     except:
-        # print(Fore.RED + 'Check Help Menu -h' + Fore.RESET)
-        exit(-1)
+        pass
+        sys.exit(-1)
 
     if not arg.active and not arg.passive:
         print(Fore.RED + "Specify Active (-A) or Passive Scanning (-P), At least one ARG should be passed\nCheck Help "
                          "menu, -h" + Fore.RESET)
-        exit(-1)
+        sys.exit(-1)
 
     if arg.type not in ['s', 'p', 'S', 'P'] and arg.passive:
         print(Fore.RED + "The Scan Type must be in 'S' or 'P'\nCheck Help menu, -h" + Fore.RESET)
-        exit(-1)
+        sys.exit(-1)
 
     if arg.type in ['p', 'P'] and not arg.username:
         arg.username = input("Username not Provided,\nEnter Username >>> " + Fore.RESET)
@@ -42,7 +43,7 @@ def main():
 
     if arg.active and arg.type in ['p', 'P']:
         print(Fore.RED + "Active Scanning is possible for Server only.\nNo need to specify" + Fore.RESET)
-        exit(-1)
+        sys.exit(-1)
 
     if arg.active:
         import vuln_scanner
@@ -67,4 +68,5 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as e:
+        print(e)
         print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)

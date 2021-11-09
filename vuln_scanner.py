@@ -1,4 +1,4 @@
-import subprocess, os
+import subprocess, os, sys
 from bs4 import BeautifulSoup as BS
 from colorama import Fore, Back, Style
 
@@ -118,4 +118,4 @@ def run(target):
                 print(Fore.GREEN + f"[+] Vulnerabilities Scan Completed for PORT : {ports[i]['portid']}\n" + Fore.RESET)
     else:
         print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + f"\t  Require root Permissions  \t" + Style.RESET_ALL)
-        exit(-1)
+        sys.exit(-1)
