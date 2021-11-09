@@ -3,21 +3,27 @@ import argparse
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description=Fore.GREEN + "Omniscient Information Gatherer" + Fore.RESET)
-    parser.add_argument("-A", "--active", help=Fore.BLUE + "For Active Scanning" + Fore.RESET, action="store_true")
-    parser.add_argument("-P", "--passive", help=Fore.BLUE + "For Active Scanning" + Fore.RESET,
-                        action="store_true")
-    parser.add_argument("-H", "--host", type=str,
-                        help=Fore.RED + "Hostname/Domain Name, incase of Server Scan" + Fore.RESET)
-    parser.add_argument("-U", "--username", type=str,
-                        help=Fore.RED + "Hostname/Domain Name, incase of Person Scan" + Fore.RESET)
-    parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
-    parser.add_argument("-T", "--type", type=str, help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
-    parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)
-    parser.add_argument("--no-linkedin", help=Fore.GREEN + "Passive Person Scan, No linkedin data" + Fore.RESET,
-                        action="store_true")
-    arg = parser.parse_args()
+    arg = None
+    try:
+        parser = argparse.ArgumentParser(
+            description=Fore.GREEN + "Omniscient Information Gatherer and Vulnerability Assessor" + Fore.RESET)
+        parser.add_argument("-A", "--active", help=Fore.BLUE + "For Active Scanning" + Fore.RESET, action="store_true")
+        parser.add_argument("-P", "--passive", help=Fore.BLUE + "For Passive Scanning" + Fore.RESET,
+                            action="store_true")
+        parser.add_argument("-H", "--host", type=str,
+                            help=Fore.RED + "Hostname/Domain Name, in case of Server Scan" + Fore.RESET)
+        parser.add_argument("-U", "--username", type=str,
+                            help=Fore.RED + "Hostname/Domain Name, in case of Person Scan" + Fore.RESET)
+        parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
+        parser.add_argument("-T", "--type", type=str,
+                            help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
+        parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)
+        parser.add_argument("--no-linkedin", help=Fore.GREEN + "Passive Person Scan, No linkedin data" + Fore.RESET,
+                            action="store_true")
+        arg = parser.parse_args()
+    except:
+        print(Fore.RED + 'Check Help Menu -h' + Fore.RESET)
+        exit(-1)
 
     if not arg.active and not arg.passive:
         print(Fore.RED + "Specify Active (-A) or Passive Scanning (-P), At least one ARG should be passed\nCheck Help "
@@ -57,8 +63,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    # try:
-    #     main()
-    # except Exception as e:
-    #     print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)
+    # main()
+    try:
+        main()
+    except Exception as e:
+        print(Style.BRIGHT + Fore.RED + Back.LIGHTWHITE_EX + "\t  Exception Caught!  \t" + Style.RESET_ALL)
