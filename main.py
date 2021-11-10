@@ -14,8 +14,8 @@ def main():
         parser.add_argument("-H", "--host", type=str,
                             help=Fore.RED + "Hostname/Domain Name, in case of Server Scan" + Fore.RESET)
         parser.add_argument("-U", "--username", type=str,
-                            help=Fore.RED + "Hostname/Domain Name, in case of Person Scan" + Fore.RESET)
-        parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
+                            help=Fore.RED + "Username, in case of Person Scan" + Fore.RESET)
+        # parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
         parser.add_argument("-T", "--type", type=str,
                             help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
         parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)

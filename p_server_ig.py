@@ -1,6 +1,6 @@
 import colorama
 from pack_server import sublist_runscript as sl3r
-from pack_server import shodan_lookup, netcraft_lookup, ddump, GoogleDork, s_report
+from pack_server import shodan_lookup, netcraft_lookup, ddump, s_report
 
 
 def run(target, sh_api):
