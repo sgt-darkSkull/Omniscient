@@ -3,9 +3,11 @@ from pack_server import sublist_runscript as sl3r
 from pack_server import shodan_lookup, netcraft_lookup, ddump, s_report
 
 
-def run(target, sh_api):
+def run(target, sh_api, output = None):
     name = ''.join(target.split('.')[:-1])
-    rpt = s_report.Report('Reports/', f'{name}.md', f"Omniscient Report for {target} \t\t\t[:SERVER:]")
+    if output is None:
+        output = f'{name}.md'
+    rpt = s_report.Report('Reports/', output, f"Omniscient Report for {target} \t\t\t[:SERVER:]")
     try:
 
         try:

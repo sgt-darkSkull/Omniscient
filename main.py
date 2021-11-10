@@ -15,7 +15,7 @@ def main():
                             help=Fore.RED + "Hostname/Domain Name, in case of Server Scan" + Fore.RESET)
         parser.add_argument("-U", "--username", type=str,
                             help=Fore.RED + "Username, in case of Person Scan" + Fore.RESET)
-        # parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
+        parser.add_argument("-o", "--output", type=str, help=Fore.GREEN + "Output File Name" + Fore.RESET)
         parser.add_argument("-T", "--type", type=str,
                             help=Fore.GREEN + "Type of Scan [Server(S)/Person(P)]" + Fore.RESET)
         parser.add_argument("-k", "--shkey", type=str, help=Fore.GREEN + "Enter SHODAN API Personal key" + Fore.RESET)
@@ -56,11 +56,11 @@ def main():
         if arg.type in ['s', 'S']:
             import p_server_ig
 
-            p_server_ig.run(arg.host, arg.shkey)
+            p_server_ig.run(arg.host, arg.shkey, arg.output)
         elif arg.type in ['p', 'P']:
             import p_person_ig
 
-            p_person_ig.run(arg.username, arg.output, arg.no_linkedin)
+            p_person_ig.run(arg.username, arg.no_linkedin, arg.output)
 
 
 if __name__ == '__main__':

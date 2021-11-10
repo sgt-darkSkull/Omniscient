@@ -4,10 +4,8 @@ from pack_person import github, codechef, coroflot, dev_community, ello, face, f
     hackerrank, instagram, mal, pinkbike, reddit, soundcloud, twitter, typeracer, ultimate_guitar, vimeo, data_access_object
 
 
-def chain_run(username):
-    dao = data_access_object.DAO()
-    dao.main()
-    rpt = p_report.Report("Reports/", f'{username}.md', f"Omniscient Report for {username} \t\t\t")
+def chain_run(username, rpt, dao):
+
     dao.insertU('Users', {'Name': 'username'}, )
     user_id = int(dao.getuserid()[0][0])
     try:
@@ -91,18 +89,32 @@ def link_parser():
         Fore.RED + "For better results Make connection with Target User on Linkedin and save their profile info - " + Fore.RESET)
     print(Fore.RED + "Give NA as input if Answer is not known.." + Fore.RESET)
     print('')
+    info = dict()
     if input("Want to Input Linkedin Information : ").lower() == ("y" or "yes"):
-        lname = input("Enter Target's Name, Full Name : ")
-        lclg = input("Enter Target's College Name : ")
-        email = input("Enter Target's Email : ")
-        phno = input("Enter Target's PHNO : ")
-        bday = input("Enter Target's Date of Birth : ")
-        adrs = input("Enter Target Address : ")
-        lnk_adr = input("Enter Target's LinkedIn Profile URL : ")
+        info['Link_name'] = input("Enter Target's Name, Full Name : ")
+        info['Link_clg'] = input("Enter Target's College Name : ")
+        info['Link_email'] = input("Enter Target's Email : ")
+        info['Link_phno'] = input("Enter Target's PHNO : ")
+        info['Link_DOB'] = input("Enter Target's Date of Birth : ")
+        info['Link_adrs'] = input("Enter Target Address : ")
+        info['Link_link'] = input("Enter Target's LinkedIn Profile URL : ")
+        return info
+    else:
+        return None
 
 
-def run(target, output= None, lreq=False):
+def run(target, lreq=False, output= None):
+    dao = data_access_object.DAO()
+    dao.main()
+    if output is None:
+        output = f'{target}.md'
+    rpt = p_report.Report("Reports/", output, f"Omniscient Report for {target} \t\t\t")
+
+    l_info = None
     if not lreq:
-        link_parser()
-    chain_run(target)
-
+        l_info = link_parser()
+    chain_run(target, rpt, dao)
+    if l_info is not None:
+        rpt.add_hn(2,'LinkedIn Information [: user submitted :]')
+        code, img = p_report.p_dict(l_info)
+        rpt.add_cd(code)
